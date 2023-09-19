@@ -1,0 +1,250 @@
+openapi: 3.0.1
+info:
+  title: Bileter API
+  description: ""
+  version: 1.0.0
+servers:
+  - url: https://api.bileter.ru/ekp
+paths:
+
+components:
+  schemas:
+    ParamsTime:
+      type: object
+      properties:
+        BeginTime:
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+        EndTime:
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+    ParamsIdShow:
+      type: object
+      properties:
+        IdShow:
+          type: array
+          items:
+            type: integer
+            format: int64
+    ParamsIdBuilding:
+      type: object
+      properties:
+        IdBuilding:
+          type: array
+          items:
+            type: integer
+    ShowChanges:
+      type: object
+      properties:
+        IdShow:
+          type: integer
+          format: int64
+        ChangesTime:
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+    ShowData:
+      type: object
+      properties:
+        IdShow:
+          type: integer
+          format: int64
+        AgeRestriction:
+          type: integer
+        Name:
+          type: string
+        ShowType:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+        IdCity:
+          type: integer
+        City:
+          type: string
+        IdBuilding:
+          type: array
+          items:
+            type: integer
+        IdHall:
+          type: array
+          items:
+            type: integer
+        IdPerformance:
+          type: array
+          items:
+            type: integer
+            format: int64
+        ImageShow:
+          type: string
+        DescriptionShow:
+          type: object
+          properties:
+            TextDescriptionShow:
+              type: string
+            ReviewShow:
+              type: string
+            ActorShow:
+              type: string
+            Duration:
+              type: integer
+            ProducerShow:
+              type: string
+            AuthorShow:
+              type: string
+            StartDateTime:
+              type: array
+              items:
+                type: string
+                pattern: '^\d{2}:\d{2} \d{2}.\d{2}.\d{4}$'
+            StartDateTimeExtended:
+              type: array
+              items:
+                  type: string
+            StartDateTimeOpen:
+              type: boolean
+            EndDateTime:
+              type: string
+              pattern: '^\d{2}:\d{2} \d{2}.\d{2}.\d{4}$'
+        ShowUrl:
+          type: string
+        ReviewUrl:
+          type: string
+        BuyUrl:
+          type: string
+    BuildingChanges:
+      type: object
+      properties:
+        IdBuilding:
+          type: integer
+        ChangesTime:
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$'
+    BuildingData:
+      type: object
+      properties:
+        IdBuilding:
+          type: integer
+        Name:
+          type: string
+        LogoBuilding:
+          type: string
+        IdCity:
+          type: integer
+        City:
+          type: string
+        IdHall:
+          type: array
+          items:
+            type: integer
+        NameHall:
+          type: array
+          items:
+            type: string
+        Address:
+          type: string
+        MetroBuilding:
+          type: string
+        UrlBuilding:
+          type: string
+    ChangesRequest:
+      required:
+        - auth
+        - id
+        - jsonrpc
+        - method
+        - params
+      type: object
+      properties:
+        auth:
+          type: string
+        id:
+          type: integer
+        jsonrpc:
+          type: string
+        method:
+          type: string
+        params:
+          $ref: '#/components/schemas/ParamsTime'
+    DataShowRequest:
+      required:
+        - auth
+        - id
+        - jsonrpc
+        - method
+        - params
+      type: object
+      properties:
+        auth:
+          type: string
+        id:
+          type: integer
+        jsonrpc:
+          type: string
+        method:
+          type: string
+        params:
+          $ref: '#/components/schemas/ParamsIdShow'
+    DataBuildingRequest:
+      required:
+        - auth
+        - id
+        - jsonrpc
+        - method
+        - params
+      type: object
+      properties:
+        auth:
+          type: string
+        id:
+          type: integer
+        jsonrpc:
+          type: string
+        method:
+          type: string
+        params:
+          $ref: '#/components/schemas/ParamsIdBuilding'
+    ChangesShowResponse:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShowChanges'
+        id:
+          type: integer
+    DataShowResponse:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/ShowData'
+        id:
+          type: integer
+    ChangesBuildingResponse:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildingChanges'
+        id:
+          type: integer
+    DataBuildingResponse:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/BuildingData'
+        id:
+          type: integer
