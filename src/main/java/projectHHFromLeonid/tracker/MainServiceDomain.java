@@ -1,19 +1,17 @@
 package projectHHFromLeonid.tracker;
 
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class MainServiceDomain {
     public final RestTemplate restTemplate;
 
-    public MainServiceDomain(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public MainServiceDomain() {
+        this.restTemplate = new RestTemplate();
     }
 
     public void downloadAndSaveVacancies(){
@@ -22,11 +20,7 @@ public class MainServiceDomain {
                 = "https://api.hh.ru/vacancies";
       //  ArrayList<String> allVacancies = new ArrayList<>();
 
-        ResponseEntity<List> response
-                = restTemplate.getForEntity(resourceUrl, List.class);
+        ResponseEntity<List> response = restTemplate.getForEntity(resourceUrl, List.class);
         System.out.println(response);
-
-
-
     }
 }

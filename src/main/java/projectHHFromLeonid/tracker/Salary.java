@@ -1,3 +1,4 @@
+/*
 package projectHHFromLeonid.tracker;
 
 
@@ -28,3 +29,4 @@ public class Salary {
 
 
 }
+*/

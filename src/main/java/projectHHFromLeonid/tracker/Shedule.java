@@ -1,3 +1,4 @@
+/*
 package projectHHFromLeonid.tracker;
 
 import lombok.Getter;
@@ -26,3 +27,4 @@ public class Shedule {
     private List<Vacancies> vacancies = new ArrayList<>();
 
 }
+*/

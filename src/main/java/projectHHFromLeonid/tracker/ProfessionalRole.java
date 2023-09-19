@@ -1,3 +1,4 @@
+/*
 package projectHHFromLeonid.tracker;
 
 
@@ -39,3 +40,4 @@ public class ProfessionalRole {
     private List<Vacancies> vacancies = new ArrayList<>();
 
 }
+*/

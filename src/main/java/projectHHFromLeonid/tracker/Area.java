@@ -1,3 +1,4 @@
+/*
 package projectHHFromLeonid.tracker;
 
 import lombok.Getter;
@@ -27,3 +28,4 @@ public class Area {
     private List<Vacancies> vacancies = new ArrayList<>();
 
 }
+*/
