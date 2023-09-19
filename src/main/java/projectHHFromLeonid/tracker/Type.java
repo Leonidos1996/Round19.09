@@ -1,3 +1,4 @@
+/*
 package projectHHFromLeonid.tracker;
 
 import lombok.Getter;
@@ -25,3 +26,4 @@ public class Type {
     @JoinColumn(name = "fk_vacancies")
     private List<Vacancies> vacancies = new ArrayList<>();
 }
+*/
