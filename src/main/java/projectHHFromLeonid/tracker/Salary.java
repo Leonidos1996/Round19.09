@@ -21,7 +21,7 @@ public class Salary {
 
     @Column
     private int summ;
-    //hello
+    //hello2
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_vacancies")
