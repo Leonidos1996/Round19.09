@@ -20,7 +20,7 @@ public class MainServiceDomain {
                 = "https://api.hh.ru/vacancies";
       //  ArrayList<String> allVacancies = new ArrayList<>();
 
-        ResponseEntity<List> response = restTemplate.getForEntity(resourceUrl, List.class);
+        ResponseEntity<ResponseHH> response = restTemplate.getForEntity(resourceUrl, ResponseHH.class);
         System.out.println(response);
 
 
