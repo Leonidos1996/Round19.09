@@ -22,5 +22,7 @@ public class MainServiceDomain {
 
         ResponseEntity<List> response = restTemplate.getForEntity(resourceUrl, List.class);
         System.out.println(response);
+
+
     }
 }
