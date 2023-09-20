@@ -41,9 +41,9 @@ components:
         published_at:
           type: string
         relations:
-          type: integer
+          type: array
         response_letter_required:
-          type: integer
+          type: boolean
         response_url:
           type: integer
         Sort_point_distance:
