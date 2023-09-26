@@ -1,9 +1,12 @@
 package projectHHFromLeonid.tracker;
 
+import integration.projectHHFromLeonid.tracker.ResponseHH;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -20,6 +23,8 @@ public class MainControllerPresentation {
 
     @GetMapping("/download_vacancies")
     public void downloadVacancies() {
-        mainServiceDomain.downloadAndSaveVacancies();
+        List<ResponseHH> resultList = new ArrayList<>();
+
+        mainServiceDomain.workInLoop();
     }
 }
