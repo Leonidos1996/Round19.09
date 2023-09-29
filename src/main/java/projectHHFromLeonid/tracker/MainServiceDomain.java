@@ -56,6 +56,7 @@ public class MainServiceDomain {
             resultList2.addAll(responseList);
         }
 
+
         this.page = 2;
         this.perPage = 100;
         this.keyWord = "PHP";
