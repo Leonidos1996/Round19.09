@@ -25,6 +25,6 @@ public class MainControllerPresentation {
     public void downloadVacancies() {
         List<ResponseHH> resultList = new ArrayList<>();
 
-        mainServiceDomain.generateUrl();
+        mainServiceDomain.generateUrl(1, 100, "Java");
     }
 }

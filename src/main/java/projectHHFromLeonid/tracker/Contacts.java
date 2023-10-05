@@ -1,4 +1,4 @@
-/*
+
 package projectHHFromLeonid.tracker;
 
 import lombok.Getter;
@@ -41,4 +41,3 @@ public class Contacts {
 
 
 }
-*/

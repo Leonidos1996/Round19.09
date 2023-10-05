@@ -31,7 +31,7 @@ public class MainServiceDomain {
         List<String> keyWords = new ArrayList<>();
         keyWords.add("PHP");
         keyWords.add("Java");
-        keyWords.add("C#");
+
 
         List<ResponseHH> responses = new ArrayList<>();
         for (String key : keyWords) {

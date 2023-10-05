@@ -1,4 +1,4 @@
-/*
+
 package projectHHFromLeonid.tracker;
 
 import lombok.Getter;
@@ -26,4 +26,4 @@ public class Metro {
     @JoinColumn(name = "fk_vacancies")
     private List<Address> addressList = new ArrayList<>();
 }
-*/
+

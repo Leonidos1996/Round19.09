@@ -1,4 +1,4 @@
-/*
+
 package projectHHFromLeonid.tracker;
 
 import lombok.Getter;
@@ -30,4 +30,4 @@ public class Vacancies {
     //добавить ссылки на тип, контакты, Ариа
 
 
-}*/
+}

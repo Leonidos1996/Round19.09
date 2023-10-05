@@ -1,4 +1,3 @@
-/*
 package projectHHFromLeonid.tracker;
 
 import lombok.Getter;
@@ -32,4 +31,3 @@ public class Address {
     @ManyToOne
     private Metro metro;
 }
-*/
