@@ -40,8 +40,6 @@ components:
           type: boolean
         published_at:
           type: string
-        relations:
-          type: array
         response_letter_required:
           type: boolean
         response_url:
@@ -50,6 +48,8 @@ components:
           type: boolean
         area:
           $ref: "#/components/schemas/Area"
+        address:
+          $ref: "#/components/schemas/Address"
         contacts:
           $ref: "#/components/schemas/Contacts"
         counters:
@@ -80,6 +80,26 @@ components:
         name:
           type: string
         url:
+          type: string
+    Address:
+      type: object
+      properties:
+        id:
+          type: string
+        building:
+          type: string
+        city:
+          type: string
+        metro:
+          type: array
+          items:
+            $ref: "#/components/schemas/MetroName"
+    MetroName:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
           type: string
     Contacts:
       type: object

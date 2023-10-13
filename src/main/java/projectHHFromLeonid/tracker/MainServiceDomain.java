@@ -12,7 +12,6 @@ import java.util.List;
 public class MainServiceDomain {
     public final RestTemplate restTemplate;
     public static final String BASE_URL = "https://api.hh.ru/vacancies";
-
     //На выходе из метода
 
     String url_exit = "https://hh.api?page=1&per_page=100&text=java";
@@ -33,7 +32,7 @@ public class MainServiceDomain {
         keyWords.add("Java");
 
 
-        List<ResponseHH> responses = new ArrayList<>();
+     List<ResponseHH> responses = new ArrayList<>();
         for (String key : keyWords) {
             for (int i = 1; i < 101; i++) {
                 String url = generateUrl(i, 100, key);
@@ -41,19 +40,6 @@ public class MainServiceDomain {
                 responses.add(response.getBody());
             }
         }
-
-//        for (ResponseHH hh : responses) {
-//            putToDatabase(hh);
-//        }
-
-
-//        String resourceUrl
-//                = "https://api.hh.ru/vacancies";
-      //  ArrayList<String> allVacancies = new ArrayList<>();
-
-//        ResponseEntity<ResponseHH> response = restTemplate.getForEntity(resourceUrl, ResponseHH.class);
-        //System.out.println(response);
-
     }
 
     public String generateUrl(int page, int perPage, String text) {

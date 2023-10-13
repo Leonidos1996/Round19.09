@@ -21,8 +21,28 @@ public class Salary {
     private Integer id;
 
     @Column
-    private int summ;
-    //hello2
+    private String summ;
+
+
+    @Column
+    private String from;
+
+    @Column
+    private boolean gross;
+
+    @Column
+    private int to;
+
+
+/*    currency:
+    type: integer
+    from:
+    type: integer
+    gross:
+    type: boolean
+    to:
+    type: object
+    //hello2*/
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_vacancies")
