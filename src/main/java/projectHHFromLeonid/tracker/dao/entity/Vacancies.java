@@ -1,5 +1,5 @@
 
-package projectHHFromLeonid.tracker;
+package projectHHFromLeonid.tracker.dao.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

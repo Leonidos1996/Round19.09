@@ -1,10 +1,10 @@
 
-package projectHHFromLeonid.tracker;
-
+package projectHHFromLeonid.tracker.dao.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import projectHHFromLeonid.tracker.dao.entity.Vacancies;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,27 +13,15 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "PROFESSIONALROLE")
-public class ProfessionalRole {
+@Table (name = "SHEDULE")
+public class Shedule {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column
     private String name;
-
-    @Column
-    private String email;
-
-    @Column
-    private Integer published;
-
-    @Column
-    private String relation;
-
-    @Column
-    private boolean responseLetterRequired;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_vacancies")

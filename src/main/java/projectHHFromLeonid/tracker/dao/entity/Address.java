@@ -1,4 +1,4 @@
-package projectHHFromLeonid.tracker;
+package projectHHFromLeonid.tracker.dao.entity;
 
 import integration.projectHHFromLeonid.tracker.MetroName;
 import lombok.Getter;

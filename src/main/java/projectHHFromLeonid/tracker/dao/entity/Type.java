@@ -1,5 +1,5 @@
 
-package projectHHFromLeonid.tracker;
+package projectHHFromLeonid.tracker.dao.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,8 +12,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table (name = "AREA")
-public class Area {
+@Table(name = "ADDRESS")
+public class Type {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,6 +25,4 @@ public class Area {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_vacancies")
     private List<Vacancies> vacancies = new ArrayList<>();
-
 }
-

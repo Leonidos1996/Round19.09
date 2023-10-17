@@ -1,4 +1,4 @@
-package projectHHFromLeonid.tracker;
+package projectHHFromLeonid.tracker.integration.hh;
 
 import integration.projectHHFromLeonid.tracker.ResponseHH;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class MainServiceDomain {
+public class HHIntegrationService {
     public final RestTemplate restTemplate;
     public static final String BASE_URL = "https://api.hh.ru/vacancies";
     //На выходе из метода
@@ -17,7 +17,7 @@ public class MainServiceDomain {
     String url_exit = "https://hh.api?page=1&per_page=100&text=java";
 
 
-    public MainServiceDomain() {
+    public HHIntegrationService() {
         this.restTemplate = new RestTemplate();
     }
 

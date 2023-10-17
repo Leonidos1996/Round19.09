@@ -1,23 +1,24 @@
-package projectHHFromLeonid.tracker;
+package projectHHFromLeonid.tracker.api;
 
 import integration.projectHHFromLeonid.tracker.ResponseHH;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import projectHHFromLeonid.tracker.integration.hh.HHIntegrationService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 @RestController
-public class MainControllerPresentation {
+public class BackdoorApi {
 
     @Autowired
-    private final MainServiceDomain mainServiceDomain;
+    private final HHIntegrationService HHIntegrationService;
 
 
-    public MainControllerPresentation(MainServiceDomain mainServiceDomain) {
-        this.mainServiceDomain = mainServiceDomain;
+    public BackdoorApi(HHIntegrationService HHIntegrationService) {
+        this.HHIntegrationService = HHIntegrationService;
     }
 
 
@@ -25,6 +26,6 @@ public class MainControllerPresentation {
     public void downloadVacancies() {
         List<ResponseHH> resultList = new ArrayList<>();
 
-        mainServiceDomain.generateUrl(1, 100, "Java");
+        HHIntegrationService.generateUrl(1, 100, "Java");
     }
 }

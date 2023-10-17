@@ -1,5 +1,5 @@
 
-package projectHHFromLeonid.tracker;
+package projectHHFromLeonid.tracker.dao.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,8 +12,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table (name = "SHEDULE")
-public class Shedule {
+@Table (name = "AREA")
+public class Area {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,3 +27,4 @@ public class Shedule {
     private List<Vacancies> vacancies = new ArrayList<>();
 
 }
+
