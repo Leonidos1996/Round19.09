@@ -9,6 +9,7 @@ import projectHHFromLeonid.tracker.integration.hh.HHIntegrationService;
 import java.util.ArrayList;
 import java.util.List;
 
+//Апи для вызова внутренних сервисов
 @RestController
 public class BackdoorApi {
 

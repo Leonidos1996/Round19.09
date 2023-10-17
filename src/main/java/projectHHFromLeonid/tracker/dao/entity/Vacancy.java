@@ -19,8 +19,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "VACANCIES")
-public class Vacancies {
+@Table(name = "VACANCY")
+public class Vacancy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

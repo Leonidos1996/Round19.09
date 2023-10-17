@@ -54,7 +54,7 @@ public class Salary {
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_vacancies")
-    private List<Vacancies> vacancies = new ArrayList<>();
+    private List<Vacancy> vacancies = new ArrayList<>();
 
 
 }
