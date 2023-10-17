@@ -21,7 +21,6 @@ public class Metro {
     @Column
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_vacancies")
+    @ManyToMany(mappedBy = "metroSet")
     private List<Address> addressList = new ArrayList<>();
 }

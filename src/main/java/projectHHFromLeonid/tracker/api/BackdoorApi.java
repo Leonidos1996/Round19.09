@@ -9,23 +9,19 @@ import projectHHFromLeonid.tracker.integration.hh.HHIntegrationService;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @RestController
 public class BackdoorApi {
 
     @Autowired
     private final HHIntegrationService HHIntegrationService;
 
-
     public BackdoorApi(HHIntegrationService HHIntegrationService) {
         this.HHIntegrationService = HHIntegrationService;
     }
 
-
     @GetMapping("/download_vacancies")
     public void downloadVacancies() {
         List<ResponseHH> resultList = new ArrayList<>();
-
         HHIntegrationService.generateUrl(1, 100, "Java");
     }
 }

@@ -1,12 +1,12 @@
 package projectHHFromLeonid.tracker.dao.entity;
 
-import integration.projectHHFromLeonid.tracker.MetroName;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -33,9 +33,8 @@ public class Address {
     private List<Vacancies> vacancies = new ArrayList<>();
 
     @ManyToMany
-    @JoinTable(
-            name = "fk_vacancies",
-            joinColumns = @JoinColumn(name = "fk_vacancies"),
-            inverseJoinColumns = @JoinColumn(name = "metro_name"))
-    private Set<Metro> metroName;
+    @JoinTable(name = "address_metro",
+            joinColumns = @JoinColumn(name = "address_id"),
+            inverseJoinColumns = @JoinColumn(name = "metro_id"))
+    private Set<Metro> metroSet = new HashSet<>();
 }
