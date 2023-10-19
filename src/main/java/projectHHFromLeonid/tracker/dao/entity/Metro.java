@@ -1,10 +1,16 @@
-package projectHHFromLeonid.tracker;
+package projectHHFromLeonid.tracker.dao.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 @Getter
@@ -21,7 +27,6 @@ public class Metro {
     @Column
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_vacancies")
+    @ManyToMany(mappedBy = "metroSet")
     private List<Address> addressList = new ArrayList<>();
 }
