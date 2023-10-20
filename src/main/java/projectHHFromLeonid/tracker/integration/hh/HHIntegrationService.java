@@ -8,6 +8,8 @@ import org.springframework.web.client.RestTemplate;
 import projectHHFromLeonid.tracker.dao.entity.Vacancy;
 import projectHHFromLeonid.tracker.dao.repos.VacancyRepo;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 

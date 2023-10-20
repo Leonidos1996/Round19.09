@@ -8,6 +8,7 @@ import projectHHFromLeonid.tracker.dao.entity.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ResponseHHentity {
 
 
@@ -70,6 +71,8 @@ public class ResponseHHentity {
         return type;
    }
 
+
+
    public Vacancy createVacancies (Item item) {
        Vacancy vacancy = new Vacancy();
 
@@ -77,7 +80,6 @@ public class ResponseHHentity {
        vacancy.setAddress(address);
 
 
-       //sa
        Area area = createArea(item);
        vacancy.setArea(area);
 
