@@ -61,7 +61,7 @@ components:
         insider_interview:
           $ref: "#/components/schemas/Insider_interview"
         salary:
-          $ref: "#/components/schemas/Salary"
+          $ref: "#/components/schemas/SalaryDTO"
         schedule:
           $ref: "#/components/schemas/Schedule"
         snippet:
@@ -162,7 +162,7 @@ components:
           type: integer
         name:
           type: string
-    Salary:
+    SalaryDTO:
       type: object
       properties:
         currency:

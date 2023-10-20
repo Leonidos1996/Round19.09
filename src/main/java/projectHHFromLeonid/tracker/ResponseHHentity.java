@@ -2,6 +2,8 @@ package projectHHFromLeonid.tracker;
 
 import integration.projectHHFromLeonid.tracker.Item;
 import integration.projectHHFromLeonid.tracker.MetroName;
+import integration.projectHHFromLeonid.tracker.SalaryDTO;
+import projectHHFromLeonid.tracker.dao.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,9 +48,12 @@ public class ResponseHHentity {
     }
 
 
-    public Salary createSalary(Item item) {
-        projectHHFromLeonid.tracker.Salary salary = new projectHHFromLeonid.tracker.Salary();
-        salary.setSumm(item.getSalary().getCurrency());
+    public SalaryDTO createSalary(Item item) {
+
+        SalaryDTO  salary = new SalaryDTO();
+        salary.setCurrency(item.getSalary().getCurrency());
+        salary.setFrom(item.getSalary().getFrom());
+        salary.setTo(item.getSalary().getTo());
         return salary;
     }
 
@@ -64,8 +69,8 @@ public class ResponseHHentity {
         return type;
    }
 
-   public Vacancies createVacancies (Item item) {
-       Vacancies vacancy = new Vacancies();
+   public Vacancy createVacancies (Item item) {
+       Vacancy vacancy = new Vacancy();
 
        Address address = createAddress(item);
        vacancy.setAddress(address);
