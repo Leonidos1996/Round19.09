@@ -2,6 +2,7 @@ package projectHHFromLeonid.tracker.integration.hh;
 
 import integration.projectHHFromLeonid.tracker.Item;
 import integration.projectHHFromLeonid.tracker.ResponseHH;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -20,19 +21,18 @@ public class HHIntegrationService {
 
     //инжектим бин VacancyRepo через конструктор, для того чтобы работать с БД
     private VacancyRepo vacancyRepo;
+    private ResponseHHentity responseHHentity;
 
     public static final String BASE_URL = "https://api.hh.ru/vacancies";
     //На выходе из метода
 
     public HHIntegrationService(
-            RestTemplate restTemplate,
-            VacancyRepo vacancyRepo) {
+            @Qualifier("hh_resttemplate") RestTemplate restTemplate,
+            VacancyRepo vacancyRepo,
+            ResponseHHentity responseHHentity) {
         this.restTemplate = restTemplate;
         this.vacancyRepo = vacancyRepo;
-    }
-
-    public HHIntegrationService() {
-        this.restTemplate = new RestTemplate();
+        this.responseHHentity = responseHHentity;
     }
 
     public void downloadAndSaveVacancies(){
@@ -55,7 +55,7 @@ public class HHIntegrationService {
         //Берем каждый респонс и для каждого Item создаем вакансию и сохраняем ее в базу данных
         for (ResponseHH response : responses) {
             for (Item item : response.getItems()) {
-                Vacancy vacancy = createVacancy(item);
+                Vacancy vacancy = responseHHentity.createVacancies(item);
                 vacancyRepo.save(vacancy);
             }
         }

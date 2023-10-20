@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 public class BackdoorApi {
 
-    @Autowired
     private final HHIntegrationService HHIntegrationService;
 
     public BackdoorApi(HHIntegrationService HHIntegrationService) {

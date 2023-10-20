@@ -1,0 +1,24 @@
+spring:
+  config:
+    activate:
+      on-profile: leonidos
+  datasource:
+    url: jdbc:postgresql://localhost:5432/MyHHProject
+    username: postgres
+    password: Leonid-123
+  jpa:
+    hibernate:
+      ddl-auto: update
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:postgresql://localhost:5432/analysis
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+

@@ -8,11 +8,9 @@ import projectHHFromLeonid.tracker.dao.entity.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ResponseHHentity {
 
 
-//dsfsdfs
    public Area createArea(Item item) {
        Area area = new Area(); //зачем нам здесь создавать Area, если мы уже передаем значения Item в метод
        area.setName(item.getArea().getName());
@@ -71,8 +69,6 @@ public class ResponseHHentity {
         return type;
    }
 
-
-
    public Vacancy createVacancies (Item item) {
        Vacancy vacancy = new Vacancy();
 
@@ -80,6 +76,7 @@ public class ResponseHHentity {
        vacancy.setAddress(address);
 
 
+       //sa
        Area area = createArea(item);
        vacancy.setArea(area);
 
