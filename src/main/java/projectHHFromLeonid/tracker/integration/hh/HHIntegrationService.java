@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import projectHHFromLeonid.tracker.ResponseHHentity;
 import projectHHFromLeonid.tracker.dao.entity.Vacancy;
 import projectHHFromLeonid.tracker.dao.repos.VacancyRepo;
 
@@ -21,6 +22,8 @@ public class HHIntegrationService {
 
     //инжектим бин VacancyRepo через конструктор, для того чтобы работать с БД
     private VacancyRepo vacancyRepo;
+
+
     private ResponseHHentity responseHHentity;
 
     public static final String BASE_URL = "https://api.hh.ru/vacancies";
