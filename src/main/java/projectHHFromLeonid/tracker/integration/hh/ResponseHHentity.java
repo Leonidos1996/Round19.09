@@ -1,15 +1,16 @@
-package projectHHFromLeonid.tracker;
+package projectHHFromLeonid.tracker.integration.hh;
 
 import integration.projectHHFromLeonid.tracker.Item;
 import integration.projectHHFromLeonid.tracker.MetroName;
 import integration.projectHHFromLeonid.tracker.SalaryDTO;
+import org.springframework.stereotype.Service;
 import projectHHFromLeonid.tracker.dao.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class ResponseHHentity {
-
 
    public Area createArea(Item item) {
        Area area = new Area(); //зачем нам здесь создавать Area, если мы уже передаем значения Item в метод
