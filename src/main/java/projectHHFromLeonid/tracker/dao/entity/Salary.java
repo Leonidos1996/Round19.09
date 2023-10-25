@@ -31,7 +31,6 @@ public class Salary {
     @Column
     private String summ;
 
-
     @Column
     private String from;
 

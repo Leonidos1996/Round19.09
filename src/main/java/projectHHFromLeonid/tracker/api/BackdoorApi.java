@@ -1,5 +1,4 @@
 package projectHHFromLeonid.tracker.api;
-
 import integration.projectHHFromLeonid.tracker.ResponseHH;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +21,6 @@ public class BackdoorApi {
     @GetMapping("/download_vacancies")
     public void downloadVacancies() {
         List<ResponseHH> resultList = new ArrayList<>();
-        HHIntegrationService.generateUrl(1, 100, "Java");
+        HHIntegrationService.downloadAndSaveVacancies();
     }
 }

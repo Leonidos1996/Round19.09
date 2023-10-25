@@ -1,15 +1,20 @@
+
 spring:
+
   config:
     activate:
       on-profile: leonidos
   datasource:
-    url: jdbc:postgresql://localhost:5432/MyHHProject
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: Leonid-123
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto=create:
+
 ---
+
+
 spring:
   config:
     activate:
@@ -21,4 +26,5 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
 

@@ -1,4 +1,4 @@
-package projectHHFromLeonid.tracker;
+package projectHHFromLeonid.tracker.integration.hh;
 
 import integration.projectHHFromLeonid.tracker.Item;
 import integration.projectHHFromLeonid.tracker.MetroName;

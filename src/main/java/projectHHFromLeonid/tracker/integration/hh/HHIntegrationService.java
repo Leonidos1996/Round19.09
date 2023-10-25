@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import projectHHFromLeonid.tracker.ResponseHHentity;
+import projectHHFromLeonid.tracker.integration.hh.ResponseHHentity;
 import projectHHFromLeonid.tracker.dao.entity.Vacancy;
 import projectHHFromLeonid.tracker.dao.repos.VacancyRepo;
 
