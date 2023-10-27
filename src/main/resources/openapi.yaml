@@ -90,7 +90,7 @@ components:
           type: string
         city:
           type: string
-        metro:
+        metro_stations:
           type: array
           items:
             $ref: "#/components/schemas/MetroName"

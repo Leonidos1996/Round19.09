@@ -32,13 +32,13 @@ public class Salary {
     private String summ;
 
     @Column
-    private String from;
+    private String stringFrom;
 
     @Column
     private boolean gross;
 
     @Column
-    private int to;
+    private String stringTo;
 
 
 /*    currency:

@@ -12,8 +12,36 @@ import java.util.List;
 @Service
 public class ResponseHHentity {
 
+    public Vacancy createVacancies(Item item) {
+        Vacancy vacancy = new Vacancy();
 
-   public Area createArea(Item item) {
+        Address address = createAddress(item);
+        vacancy.setAddress(address);
+        //sa
+        Area area = new Area(); //зачем нам здесь создавать Area, если мы уже передаем значения Item в метод
+        area.setName(item.getArea().getName());
+        vacancy.setArea(area);
+
+        Contacts contacts = createContacts(item);
+        vacancy.setContacts(contacts);
+
+        List<Metro> metro = createMetro(item);
+        vacancy.setMetroName(metro);
+
+        ProfessionalRole professionalRole = createProfessionalRole(item);
+        vacancy.setProfessionalRole(professionalRole);
+
+        Shedule shedule = createShedule(item);
+        vacancy.setShedule(shedule);
+
+        Type type = createType(item);
+        vacancy.setType(type);
+
+        return vacancy;
+    }
+
+
+    public Area createArea(Item item) {
        Area area = new Area(); //зачем нам здесь создавать Area, если мы уже передаем значения Item в метод
        area.setName(item.getArea().getName());
        return area;
@@ -33,7 +61,7 @@ public class ResponseHHentity {
     }
         public List<Metro> createMetro(Item item) {
         List<Metro> metroList = new ArrayList<Metro>();
-        for  (MetroName metroName : item.getAddress().getMetro()) {
+        for  (MetroName metroName : item.getAddress().getMetroStations()) {
             Metro newMetro = new Metro();
             newMetro.setName(metroName.getName());
             metroList.add(newMetro);
@@ -71,33 +99,5 @@ public class ResponseHHentity {
         return type;
    }
 
-   public Vacancy createVacancies (Item item) {
-       Vacancy vacancy = new Vacancy();
-
-       Address address = createAddress(item);
-       vacancy.setAddress(address);
-
-
-       //sa
-       Area area = createArea(item);
-       vacancy.setArea(area);
-
-       Contacts contacts = createContacts(item);
-       vacancy.setContacts(contacts);
-
-       List<Metro> metro = createMetro(item);
-       vacancy.setMetroName(metro);
-
-       ProfessionalRole professionalRole = createProfessionalRole(item);
-       vacancy.setProfessionalRole(professionalRole);
-
-       Shedule shedule = createShedule(item);
-       vacancy.setShedule(shedule);
-
-       Type type = createType(item);
-       vacancy.setType(type);
-
-        return vacancy;
-   }
 
 }
