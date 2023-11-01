@@ -46,5 +46,5 @@ public class Address {
     @JoinTable(name = "address_metro",
             joinColumns = @JoinColumn(name = "address_id"),
             inverseJoinColumns = @JoinColumn(name = "metro_id"))
-    private Set<Metro> metroSet = new HashSet<>();
+    private Set<Metro> metro_stations = new HashSet<>();
 }

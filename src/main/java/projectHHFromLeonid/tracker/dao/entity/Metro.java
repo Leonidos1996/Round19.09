@@ -27,6 +27,6 @@ public class Metro {
     @Column
     private String name;
 
-    @ManyToMany(mappedBy = "metroSet")
+    @ManyToMany(mappedBy = "metro_stations")
     private List<Address> addressList = new ArrayList<>();
 }

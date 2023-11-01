@@ -48,7 +48,7 @@ public class HHIntegrationService {
         List<ResponseHH> responses = new ArrayList<>();
         for (String key : keyWords) {
             //проходимся по всем страницам и сохраняем ответ ХХ в список responses
-            for (int i = 1; i < 101; i++) {
+            for (int i = 1; i < 10; i++) {
                 String url = generateUrl(i, 100, key);
                 ResponseEntity<ResponseHH> response = restTemplate.getForEntity(url, ResponseHH.class);
                 responses.add(response.getBody());

@@ -43,7 +43,7 @@ components:
         response_letter_required:
           type: boolean
         response_url:
-          type: integer
+          type: string
         Sort_point_distance:
           type: boolean
         area:
@@ -90,7 +90,7 @@ components:
           type: string
         city:
           type: string
-        metro:
+        metro_stations:
           type: array
           items:
             $ref: "#/components/schemas/MetroName"

@@ -5,13 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,31 +20,30 @@ public class Vacancy {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private Address address;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private Salary salary;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private Area area;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private Contacts contacts;
 
-    @ManyToMany
+    @ManyToMany (cascade = CascadeType.PERSIST)
     private List<Metro> metroName = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private ProfessionalRole professionalRole;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private Shedule shedule;
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.PERSIST)
     private Type type;
 
-    //добавить ссылки на тип, контакты, Ариа
 
 
 }
