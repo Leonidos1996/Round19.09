@@ -6,11 +6,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import projectHHFromLeonid.tracker.integration.hh.ResponseHHentity;
 import projectHHFromLeonid.tracker.dao.entity.Vacancy;
 import projectHHFromLeonid.tracker.dao.repos.VacancyRepo;
-
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +16,8 @@ import java.util.List;
 public class HHIntegrationService {
 
     private RestTemplate restTemplate;
-
     //инжектим бин VacancyRepo через конструктор, для того чтобы работать с БД
     private VacancyRepo vacancyRepo;
-
-
     private ResponseHHentity responseHHentity;
 
     public static final String BASE_URL = "https://api.hh.ru/vacancies";
@@ -59,7 +53,7 @@ public class HHIntegrationService {
         for (ResponseHH response : responses) {
             for (Item item : response.getItems()) {
                 Vacancy vacancy = responseHHentity.createVacancies(item);
-                vacancyRepo.save(vacancy);
+                //vacancyRepo.save(vacancy);
             }
         }
     }

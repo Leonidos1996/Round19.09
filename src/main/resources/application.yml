@@ -1,6 +1,4 @@
-
 spring:
-
   config:
     activate:
       on-profile: leonidos
@@ -13,8 +11,6 @@ spring:
       ddl-auto=create:
 
 ---
-
-
 spring:
   config:
     activate:

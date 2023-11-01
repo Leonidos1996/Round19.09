@@ -1,6 +1,6 @@
 package projectHHFromLeonid.tracker.api;
+
 import integration.projectHHFromLeonid.tracker.ResponseHH;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import projectHHFromLeonid.tracker.integration.hh.HHIntegrationService;
