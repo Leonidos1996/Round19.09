@@ -57,8 +57,16 @@ public class ResponseHHentity {
        return professionalRole;
     }
 
+    public Salary createSalary (Item item) {
+       Salary salary = new Salary();
+       if (item.getSalary() != null){
+           salary.setStringFrom(item.getSalary().getFrom());
+       }
+        return salary;
+    }
 
-    public SalaryDTO createSalary(Item item) {
+
+/*    public SalaryDTO createSalary(Item item) {
 
         SalaryDTO  salary = new SalaryDTO();
         if (item.getSalary() != null) {
@@ -67,7 +75,7 @@ public class ResponseHHentity {
             salary.setTo(item.getSalary().getTo());
         }
         return salary;
-    }
+    }*/
 
     public Shedule createShedule (Item item) {
        Shedule shedule = new Shedule();
@@ -91,7 +99,6 @@ public class ResponseHHentity {
        Address address = createAddress(item);
        vacancy.setAddress(address);
 
-
        //sa
        Area area = createArea(item);
        vacancy.setArea(area);
@@ -101,6 +108,9 @@ public class ResponseHHentity {
 
        List<Metro> metro = createMetro(item);
        vacancy.setMetroName(metro);
+
+       Salary salary = createSalary(item);
+       vacancy.setSalary(salary);
 
        ProfessionalRole professionalRole = createProfessionalRole(item);
        vacancy.setProfessionalRole(professionalRole);
