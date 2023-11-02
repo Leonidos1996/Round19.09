@@ -21,31 +21,39 @@ public class ResponseHHentity {
 
     public Address createAddress (Item item) {
        Address address = new Address();
-       address.setBuilding(item.getAddress().getBuilding());
+       if(item.getAddress() != null){
+           address.setBuilding(item.getAddress().getBuilding());
+       }
        //нужно ли сити устанавливать ?
        return address;
     }
 
     public Contacts createContacts (Item item) {
         Contacts contacts = new Contacts();
-        contacts.setEmail(item.getContacts().getEmail());
+        if (item.getContacts() != null){
+            contacts.setEmail(item.getContacts().getEmail());
+        }
         return contacts;
     }
         public List<Metro> createMetro(Item item) {
         List<Metro> metroList = new ArrayList<Metro>();
-        for  (MetroName metroName : item.getAddress().getMetro()) {
-            Metro newMetro = new Metro();
-            newMetro.setName(metroName.getName());
-            metroList.add(newMetro);
-            //Здесь допиши свою реализацию
-            //newMetro.setName(String.valueOf(metro));
+        if (item.getAddress() != null) {
+            for  (MetroName metroName : item.getAddress().getMetroStations()) {
+                Metro newMetro = new Metro();
+                newMetro.setName(metroName.getName());
+                metroList.add(newMetro);
+
+            }
         }
+
         return metroList;
     }
 
     public ProfessionalRole createProfessionalRole (Item item) {
        ProfessionalRole professionalRole = new ProfessionalRole();
-       professionalRole.setName(item.getProfessionalRoles().toString());
+       if (item.getProfessionalRoles() != null){
+           professionalRole.setName(item.getProfessionalRoles().toString());
+       }
        return professionalRole;
     }
 
@@ -53,21 +61,27 @@ public class ResponseHHentity {
     public SalaryDTO createSalary(Item item) {
 
         SalaryDTO  salary = new SalaryDTO();
-        salary.setCurrency(item.getSalary().getCurrency());
-        salary.setFrom(item.getSalary().getFrom());
-        salary.setTo(item.getSalary().getTo());
+        if (item.getSalary() != null) {
+            salary.setCurrency(item.getSalary().getCurrency());
+            salary.setFrom(item.getSalary().getFrom());
+            salary.setTo(item.getSalary().getTo());
+        }
         return salary;
     }
 
     public Shedule createShedule (Item item) {
        Shedule shedule = new Shedule();
-       shedule.setName(item.getSchedule().getName());
+       if (item.getSchedule() != null){
+           shedule.setName(item.getSchedule().getName());
+       }
        return shedule;
     }
 
     public Type createType (Item item) {
        Type type = new Type();
-       type.setName(item.getType().getName());
+       if (item.getType() != null){
+           type.setName(item.getType().getName());
+       }
         return type;
    }
 
