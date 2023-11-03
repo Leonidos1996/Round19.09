@@ -53,7 +53,7 @@ public class HHIntegrationService {
         for (ResponseHH response : responses) {
             for (Item item : response.getItems()) {
                 Vacancy vacancy = responseHHentity.createVacancies(item);
-                //vacancyRepo.save(vacancy);
+                vacancyRepo.save(vacancy);
             }
         }
     }
