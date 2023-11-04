@@ -14,34 +14,44 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "VACANCY")
+//TODO убрать лишние строки
 public class Vacancy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(foreignKey = @ForeignKey(name = "address_id"))
     private Address address;
 
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(foreignKey = @ForeignKey(name = "salary_id"))
     private Salary salary;
 
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(foreignKey = @ForeignKey(name = "area_id"))
     private Area area;
 
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(foreignKey = @ForeignKey(name = "contact_id"))
     private Contacts contacts;
 
     @ManyToMany (cascade = CascadeType.PERSIST)
+    //TODO: убрать Metro (затащим в address)
     private List<Metro> metroName = new ArrayList<>();
 
     @ManyToOne (cascade = CascadeType.PERSIST)
+    //TODO скорее всего здесь должно быть Many-To-Many (у ваканскии может быть много ролей, у проф роли может быть много вакансий)
     private ProfessionalRole professionalRole;
 
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(foreignKey = @ForeignKey(name = "schedule_id"))
+    //TODO: опечатка должно быть: schedule
     private Shedule shedule;
 
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(foreignKey = @ForeignKey(name = "type_id"))
     private Type type;
 
 

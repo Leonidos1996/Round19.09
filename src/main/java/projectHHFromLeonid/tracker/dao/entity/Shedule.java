@@ -21,6 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table (name = "SHEDULE")
+//TODO убрать лишние строки
 public class Shedule {
 
     @Id
@@ -30,7 +31,8 @@ public class Shedule {
     @Column
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "shedule", fetch = FetchType.LAZY)
+    //TODO: убрать, посскольку у нас двунаправленная свзяь join column здесь не нужен
     @JoinColumn(name = "fk_vacancies")
     private List<Vacancy> vacancies = new ArrayList<>();
 

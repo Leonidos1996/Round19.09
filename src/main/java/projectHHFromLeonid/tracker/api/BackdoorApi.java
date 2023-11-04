@@ -20,6 +20,7 @@ public class BackdoorApi {
 
     @GetMapping("/download_vacancies")
     public void downloadVacancies() {
+        //TODO убрать лишнее
         List<ResponseHH> resultList = new ArrayList<>();
         HHIntegrationService.downloadAndSaveVacancies();
     }

@@ -172,7 +172,7 @@ components:
         gross:
           type: boolean
         to:
-          type: object
+          type: string
     Schedule:
       type: object
       properties:

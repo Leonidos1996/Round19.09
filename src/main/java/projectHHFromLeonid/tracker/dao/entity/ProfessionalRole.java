@@ -22,6 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "PROFESSIONALROLE")
+//TODO убрать лишние строки
 public class ProfessionalRole {
 
     @Id
@@ -43,7 +44,8 @@ public class ProfessionalRole {
     @Column
     private boolean responseLetterRequired;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    //Переделать на Many-To-Many
+    @OneToMany(mappedBy = "professionalRole", fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_vacancies")
     private List<Vacancy> vacancies = new ArrayList<>();
 

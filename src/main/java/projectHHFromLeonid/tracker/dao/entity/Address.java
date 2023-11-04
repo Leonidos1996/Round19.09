@@ -25,6 +25,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "ADDRESS")
+//TODO: добавить все поля которые приходят от HH. id в том числе
+//TODO: добавить many-to-many Metro
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,6 +41,7 @@ public class Address {
     private String city;
 
     @OneToMany(fetch = FetchType.LAZY)
+    //TODO: убрать, посскольку у нас двунаправленная свзяь join column здесь не нужен
     @JoinColumn(name = "fk_vacancies")
     private List<Vacancy> vacancies = new ArrayList<>();
 

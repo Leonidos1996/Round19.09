@@ -14,14 +14,11 @@ import java.util.List;
 
 @Service
 public class HHIntegrationService {
+    public static final String BASE_URL = "https://api.hh.ru/vacancies";
 
     private RestTemplate restTemplate;
-    //инжектим бин VacancyRepo через конструктор, для того чтобы работать с БД
     private VacancyRepo vacancyRepo;
     private ResponseHHentity responseHHentity;
-
-    public static final String BASE_URL = "https://api.hh.ru/vacancies";
-    //На выходе из метода
 
     public HHIntegrationService(
             @Qualifier("hh_resttemplate") RestTemplate restTemplate,

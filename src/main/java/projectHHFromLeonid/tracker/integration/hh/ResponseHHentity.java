@@ -2,14 +2,18 @@ package projectHHFromLeonid.tracker.integration.hh;
 
 import integration.projectHHFromLeonid.tracker.Item;
 import integration.projectHHFromLeonid.tracker.MetroName;
+//TODO: убрать лишние импорты
 import integration.projectHHFromLeonid.tracker.SalaryDTO;
 import org.springframework.stereotype.Service;
+//TODO: звездочек быть не должно, поменять настройки идеи
 import projectHHFromLeonid.tracker.dao.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+//TODO: переименовать класс, сейчас его имя не говорит ни о чем, за что он отвечает
+//TODO: убрать лишние пустые строки
 public class ResponseHHentity {
 
 
@@ -21,10 +25,11 @@ public class ResponseHHentity {
 
     public Address createAddress (Item item) {
        Address address = new Address();
-       if(item.getAddress() != null){
+       if (item.getAddress() != null){
            address.setBuilding(item.getAddress().getBuilding());
        }
        //нужно ли сити устанавливать ?
+        //TODO установить city.
        return address;
     }
 
@@ -33,9 +38,11 @@ public class ResponseHHentity {
         if (item.getContacts() != null){
             contacts.setEmail(item.getContacts().getEmail());
         }
+        //TODO почему установил только email
         return contacts;
     }
-        public List<Metro> createMetro(Item item) {
+
+    public List<Metro> createMetro(Item item) {
         List<Metro> metroList = new ArrayList<Metro>();
         if (item.getAddress() != null) {
             for  (MetroName metroName : item.getAddress().getMetroStations()) {
@@ -45,13 +52,13 @@ public class ResponseHHentity {
 
             }
         }
-
         return metroList;
     }
 
     public ProfessionalRole createProfessionalRole (Item item) {
        ProfessionalRole professionalRole = new ProfessionalRole();
        if (item.getProfessionalRoles() != null){
+           //TODO: переделать этот кусок. здесь в поле name устанавливается не то что нужно
            professionalRole.setName(item.getProfessionalRoles().toString());
        }
        return professionalRole;
@@ -61,21 +68,12 @@ public class ResponseHHentity {
        Salary salary = new Salary();
        if (item.getSalary() != null){
            salary.setStringFrom(item.getSalary().getFrom());
+           salary.setStringTo(item.getSalary().getTo());
+           salary.setGross(item.getSalary().isGross());
        }
-        return salary;
+       //TODO: почему установил только getFrom, остальные поля тоже нужны
+       return salary;
     }
-
-
-/*    public SalaryDTO createSalary(Item item) {
-
-        SalaryDTO  salary = new SalaryDTO();
-        if (item.getSalary() != null) {
-            salary.setCurrency(item.getSalary().getCurrency());
-            salary.setFrom(item.getSalary().getFrom());
-            salary.setTo(item.getSalary().getTo());
-        }
-        return salary;
-    }*/
 
     public Shedule createShedule (Item item) {
        Shedule shedule = new Shedule();
@@ -96,32 +94,16 @@ public class ResponseHHentity {
    public Vacancy createVacancies (Item item) {
        Vacancy vacancy = new Vacancy();
 
-       Address address = createAddress(item);
-       vacancy.setAddress(address);
+       vacancy.setAddress(createAddress(item));
+       vacancy.setArea(createArea(item));
+       vacancy.setContacts(createContacts(item));
+       vacancy.setMetroName(createMetro(item));
+       vacancy.setSalary(createSalary(item));
+       vacancy.setProfessionalRole(createProfessionalRole(item));
+       vacancy.setShedule(createShedule(item));
+       vacancy.setType(createType(item));
 
-       //sa
-       Area area = createArea(item);
-       vacancy.setArea(area);
-
-       Contacts contacts = createContacts(item);
-       vacancy.setContacts(contacts);
-
-       List<Metro> metro = createMetro(item);
-       vacancy.setMetroName(metro);
-
-       Salary salary = createSalary(item);
-       vacancy.setSalary(salary);
-
-       ProfessionalRole professionalRole = createProfessionalRole(item);
-       vacancy.setProfessionalRole(professionalRole);
-
-       Shedule shedule = createShedule(item);
-       vacancy.setShedule(shedule);
-
-       Type type = createType(item);
-       vacancy.setType(type);
-
-        return vacancy;
+       return vacancy;
    }
 
 }

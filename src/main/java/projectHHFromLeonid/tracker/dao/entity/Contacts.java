@@ -23,6 +23,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "CONTACTS")
+//TODO убрать лишние строки
 public class Contacts {
 
 
@@ -42,7 +43,8 @@ public class Contacts {
     private int phone;
 
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "contacts", fetch = FetchType.LAZY)
+    //TODO: убрать, посскольку у нас двунаправленная свзяь join column здесь не нужен
     @JoinColumn(name = "fk_vacancies")
     private List<Vacancy> vacancies = new ArrayList<>();
 

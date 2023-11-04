@@ -22,6 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table (name = "SALARY")
+//TODO убрать закомментированный код
 public class Salary {
 
     @Id
@@ -51,7 +52,8 @@ public class Salary {
     type: object
     //hello2*/
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "salary", fetch = FetchType.LAZY)
+    //TODO: убрать, поскольку у нас двунаправленная свзяь join column здесь не нужен
     @JoinColumn(name = "fk_vacancies")
     private List<Vacancy> vacancies = new ArrayList<>();
 

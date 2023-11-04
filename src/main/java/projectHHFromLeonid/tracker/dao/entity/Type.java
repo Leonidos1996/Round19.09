@@ -30,7 +30,8 @@ public class Type {
     @Column
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
+    //TODO: убрать, посскольку у нас двунаправленная свзяь join column здесь не нужен
     @JoinColumn(name = "fk_vacancies")
     private List<Vacancy> vacancies = new ArrayList<>();
 }
