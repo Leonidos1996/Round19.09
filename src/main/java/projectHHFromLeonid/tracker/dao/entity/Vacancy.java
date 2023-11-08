@@ -38,17 +38,13 @@ public class Vacancy {
     private Contacts contacts;
 
     @ManyToMany (cascade = CascadeType.PERSIST)
-    //TODO: убрать Metro (затащим в address)
-    private List<Metro> metroName = new ArrayList<>();
-
-    @ManyToMany (cascade = CascadeType.PERSIST)
     //TODO скорее всего здесь должно быть Many-To-Many (у ваканскии может быть много ролей, у проф роли может быть много вакансий)
     private List<ProfessionalRole>  professionalRole = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(foreignKey = @ForeignKey(name = "schedule_id"))
     //TODO: опечатка должно быть: schedule
-    private Shedule shedule;
+    private Schedule schedule;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(foreignKey = @ForeignKey(name = "type_id"))

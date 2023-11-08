@@ -2,10 +2,17 @@ package projectHHFromLeonid.tracker.integration.hh;
 
 import integration.projectHHFromLeonid.tracker.Item;
 import integration.projectHHFromLeonid.tracker.MetroName;
-//TODO: убрать лишние импорты
 import org.springframework.stereotype.Service;
-//TODO: звездочек быть не должно, поменять настройки идеи
-import projectHHFromLeonid.tracker.dao.entity.*;
+import projectHHFromLeonid.tracker.dao.entity.Address;
+import projectHHFromLeonid.tracker.dao.entity.Area;
+import projectHHFromLeonid.tracker.dao.entity.Contacts;
+import projectHHFromLeonid.tracker.dao.entity.Metro;
+import projectHHFromLeonid.tracker.dao.entity.Phone;
+import projectHHFromLeonid.tracker.dao.entity.ProfessionalRole;
+import projectHHFromLeonid.tracker.dao.entity.Salary;
+import projectHHFromLeonid.tracker.dao.entity.Schedule;
+import projectHHFromLeonid.tracker.dao.entity.Type;
+import projectHHFromLeonid.tracker.dao.entity.Vacancy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,21 +63,6 @@ public class ResponseHHentity {
     }
 
 
-
-
-/*    public List<Metro> createMetro(Item item) {
-        List<Metro> metroList = new ArrayList<Metro>();
-        if (item.getAddress() != null) {
-            for  (MetroName metroName : item.getAddress().getMetroStations()) {
-                Metro newMetro = new Metro();
-                newMetro.setName(metroName.getName());
-                metroList.add(newMetro);
-
-            }
-        }
-        return metroList;
-    }*/
-
     public  List<ProfessionalRole> createProfessionalRole (Item item) {
         List<ProfessionalRole> professionalRolesList = new ArrayList<ProfessionalRole>();
        if (item.getProfessionalRoles() != null){
@@ -95,12 +87,12 @@ public class ResponseHHentity {
        return salary;
     }
 
-    public Shedule createShedule (Item item) {
-       Shedule shedule = new Shedule();
+    public Schedule createShedule (Item item) {
+       Schedule schedule = new Schedule();
        if (item.getSchedule() != null){
-           shedule.setName(item.getSchedule().getName());
+           schedule.setName(item.getSchedule().getName());
        }
-       return shedule;
+       return schedule;
     }
 
     public Type createType (Item item) {
@@ -120,7 +112,7 @@ public class ResponseHHentity {
        // vacancy.setMetroName(createMetro(item));
        vacancy.setSalary(createSalary(item));
        vacancy.setProfessionalRole(createProfessionalRole(item));
-       vacancy.setShedule(createShedule(item));
+       vacancy.setSchedule(createShedule(item));
        vacancy.setType(createType(item));
 
        return vacancy;

@@ -12,7 +12,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
@@ -40,7 +39,6 @@ public class Salary {
 
     @Column
     private String stringTo;
-
 
     @OneToMany(mappedBy = "salary", fetch = FetchType.LAZY)
     //TODO: убрать, поскольку у нас двунаправленная свзяь join column здесь не нужен

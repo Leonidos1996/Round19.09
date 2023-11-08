@@ -1,11 +1,8 @@
 
 package projectHHFromLeonid.tracker.dao.entity;
-
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +13,6 @@ import java.util.List;
 @Table(name = "PROFESSIONALROLE")
 //TODO убрать лишние строки
 public class ProfessionalRole {
-
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private Integer id;
@@ -24,18 +20,6 @@ public class ProfessionalRole {
     @Column
     private String name;
 
-    /*@Column
-    private String email;
-
-    @Column
-    private Integer published;
-
-    @Column
-    private String relation;
-
-    @Column
-    private boolean responseLetterRequired;
-*/
     //Переделать на Many-To-Many
     @ManyToMany(mappedBy = "professionalRole", fetch = FetchType.LAZY)
     private List<Vacancy> vacancies = new ArrayList<>();
