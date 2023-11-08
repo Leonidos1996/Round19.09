@@ -32,17 +32,19 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+
     @Column
     private String building;
 
-    @Getter
-    @Setter
     @Column
     private String city;
 
+    @Column
+    private String description;
+
+
     @OneToMany(fetch = FetchType.LAZY)
     //TODO: убрать, посскольку у нас двунаправленная свзяь join column здесь не нужен
-    @JoinColumn(name = "fk_vacancies")
     private List<Vacancy> vacancies = new ArrayList<>();
 
     @ManyToMany

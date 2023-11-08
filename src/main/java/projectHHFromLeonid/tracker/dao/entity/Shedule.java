@@ -33,7 +33,6 @@ public class Shedule {
 
     @OneToMany(mappedBy = "shedule", fetch = FetchType.LAZY)
     //TODO: убрать, посскольку у нас двунаправленная свзяь join column здесь не нужен
-    @JoinColumn(name = "fk_vacancies")
     private List<Vacancy> vacancies = new ArrayList<>();
 
 }

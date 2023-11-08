@@ -3,7 +3,6 @@ package projectHHFromLeonid.tracker.integration.hh;
 import integration.projectHHFromLeonid.tracker.Item;
 import integration.projectHHFromLeonid.tracker.MetroName;
 //TODO: убрать лишние импорты
-import integration.projectHHFromLeonid.tracker.SalaryDTO;
 import org.springframework.stereotype.Service;
 //TODO: звездочек быть не должно, поменять настройки идеи
 import projectHHFromLeonid.tracker.dao.entity.*;
@@ -27,6 +26,13 @@ public class ResponseHHentity {
        Address address = new Address();
        if (item.getAddress() != null){
            address.setBuilding(item.getAddress().getBuilding());
+           address.setCity(item.getAddress().getCity());
+           List<Metro> metroList = new ArrayList<Metro>();
+               for  (MetroName metroName : item.getAddress().getMetroStations()) {
+                   Metro newMetro = new Metro();
+                   newMetro.setName(metroName.getName());
+                   metroList.add(newMetro);
+           }
        }
        //нужно ли сити устанавливать ?
         //TODO установить city.
@@ -37,12 +43,22 @@ public class ResponseHHentity {
         Contacts contacts = new Contacts();
         if (item.getContacts() != null){
             contacts.setEmail(item.getContacts().getEmail());
+            contacts.setName(item.getContacts().getName());
+            List<Phone> phoneList = new ArrayList<>();
+                for (integration.projectHHFromLeonid.tracker.PhoneDTO phoneName : item.getContacts().getPhones()){
+                    Phone newPhones = new Phone();
+                    newPhones.setNumber(phoneName.getNumber());
+                    phoneList.add(newPhones);
+               }
         }
         //TODO почему установил только email
         return contacts;
     }
 
-    public List<Metro> createMetro(Item item) {
+
+
+
+/*    public List<Metro> createMetro(Item item) {
         List<Metro> metroList = new ArrayList<Metro>();
         if (item.getAddress() != null) {
             for  (MetroName metroName : item.getAddress().getMetroStations()) {
@@ -53,15 +69,18 @@ public class ResponseHHentity {
             }
         }
         return metroList;
-    }
+    }*/
 
-    public ProfessionalRole createProfessionalRole (Item item) {
-       ProfessionalRole professionalRole = new ProfessionalRole();
+    public  List<ProfessionalRole> createProfessionalRole (Item item) {
+        List<ProfessionalRole> professionalRolesList = new ArrayList<ProfessionalRole>();
        if (item.getProfessionalRoles() != null){
-           //TODO: переделать этот кусок. здесь в поле name устанавливается не то что нужно
-           professionalRole.setName(item.getProfessionalRoles().toString());
+           for (integration.projectHHFromLeonid.tracker.ProfessionalRole roles : item.getProfessionalRoles()){
+               ProfessionalRole professionalRole = new ProfessionalRole();
+               professionalRole.setName(roles.getName());
+               professionalRolesList.add(professionalRole);
+           }
        }
-       return professionalRole;
+       return professionalRolesList;
     }
 
     public Salary createSalary (Item item) {
@@ -70,8 +89,9 @@ public class ResponseHHentity {
            salary.setStringFrom(item.getSalary().getFrom());
            salary.setStringTo(item.getSalary().getTo());
            salary.setGross(item.getSalary().isGross());
+           salary.setCurrency(item.getSalary().getCurrency());
+
        }
-       //TODO: почему установил только getFrom, остальные поля тоже нужны
        return salary;
     }
 
@@ -97,7 +117,7 @@ public class ResponseHHentity {
        vacancy.setAddress(createAddress(item));
        vacancy.setArea(createArea(item));
        vacancy.setContacts(createContacts(item));
-       vacancy.setMetroName(createMetro(item));
+       // vacancy.setMetroName(createMetro(item));
        vacancy.setSalary(createSalary(item));
        vacancy.setProfessionalRole(createProfessionalRole(item));
        vacancy.setShedule(createShedule(item));

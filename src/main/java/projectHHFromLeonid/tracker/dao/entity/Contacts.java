@@ -5,17 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @NoArgsConstructor
@@ -39,15 +31,17 @@ public class Contacts {
     @Column
     private String name;
 
-    @Column
-    private int phone;
 
 
     @OneToMany(mappedBy = "contacts", fetch = FetchType.LAZY)
     //TODO: убрать, посскольку у нас двунаправленная свзяь join column здесь не нужен
-    @JoinColumn(name = "fk_vacancies")
-    private List<Vacancy> vacancies = new ArrayList<>();
+    private Set<Vacancy> vacancies = new HashSet<>();
 
+    @OneToMany
+    @JoinTable(name = "contacts_phonesentity",
+            joinColumns = @JoinColumn(name = "acontacts_id"),
+            inverseJoinColumns = @JoinColumn(name = "phonesentity_id"))
+    private Set<Phone> phones = new HashSet<>() ;
 
 
 }

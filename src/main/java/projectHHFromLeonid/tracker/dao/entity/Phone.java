@@ -1,4 +1,3 @@
-
 package projectHHFromLeonid.tracker.dao.entity;
 
 import lombok.Getter;
@@ -7,12 +6,10 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,17 +17,17 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "ADDRESS")
-public class Type {
+@Table(name = "PHONESENTITY")
+public class Phone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column
-    private String name;
+    private String number;
 
-    @OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
-    //TODO: убрать, посскольку у нас двунаправленная свзяь join column здесь не нужен
-    private List<Vacancy> vacancies = new ArrayList<>();
+    @ManyToMany(mappedBy = "metro_stations")
+    private List<Address> addressList = new ArrayList<>();
+
 }

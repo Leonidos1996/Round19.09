@@ -6,15 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 @Getter
@@ -32,7 +24,7 @@ public class ProfessionalRole {
     @Column
     private String name;
 
-    @Column
+    /*@Column
     private String email;
 
     @Column
@@ -43,10 +35,9 @@ public class ProfessionalRole {
 
     @Column
     private boolean responseLetterRequired;
-
+*/
     //Переделать на Many-To-Many
-    @OneToMany(mappedBy = "professionalRole", fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_vacancies")
+    @ManyToMany(mappedBy = "professionalRole", fetch = FetchType.LAZY)
     private List<Vacancy> vacancies = new ArrayList<>();
 
 }

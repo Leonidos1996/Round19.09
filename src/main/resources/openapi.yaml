@@ -111,8 +111,8 @@ components:
         phones:
           type: array
           items:
-            $ref: "#/components/schemas/Phone"
-    Phone:
+            $ref: "#/components/schemas/PhoneDTO"
+    PhoneDTO:
       type: object
       properties:
         city:

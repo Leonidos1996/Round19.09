@@ -41,9 +41,9 @@ public class Vacancy {
     //TODO: убрать Metro (затащим в address)
     private List<Metro> metroName = new ArrayList<>();
 
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @ManyToMany (cascade = CascadeType.PERSIST)
     //TODO скорее всего здесь должно быть Many-To-Many (у ваканскии может быть много ролей, у проф роли может быть много вакансий)
-    private ProfessionalRole professionalRole;
+    private List<ProfessionalRole>  professionalRole = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(foreignKey = @ForeignKey(name = "schedule_id"))

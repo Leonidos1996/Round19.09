@@ -30,7 +30,7 @@ public class Salary {
     private Integer id;
 
     @Column
-    private String summ;
+    private String currency;
 
     @Column
     private String stringFrom;
@@ -42,19 +42,8 @@ public class Salary {
     private String stringTo;
 
 
-/*    currency:
-    type: integer
-    from:
-    type: integer
-    gross:
-    type: boolean
-    to:
-    type: object
-    //hello2*/
-
     @OneToMany(mappedBy = "salary", fetch = FetchType.LAZY)
     //TODO: убрать, поскольку у нас двунаправленная свзяь join column здесь не нужен
-    @JoinColumn(name = "fk_vacancies")
     private List<Vacancy> vacancies = new ArrayList<>();
 
 
