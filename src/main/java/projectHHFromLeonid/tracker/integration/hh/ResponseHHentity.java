@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import projectHHFromLeonid.tracker.dao.entity.Address;
 import projectHHFromLeonid.tracker.dao.entity.Area;
 import projectHHFromLeonid.tracker.dao.entity.Contacts;
+import projectHHFromLeonid.tracker.dao.entity.Employer;
 import projectHHFromLeonid.tracker.dao.entity.Metro;
 import projectHHFromLeonid.tracker.dao.entity.Phone;
 import projectHHFromLeonid.tracker.dao.entity.ProfessionalRole;
@@ -41,7 +42,6 @@ public class ResponseHHentity {
                    metroList.add(newMetro);
            }
        }
-       //нужно ли сити устанавливать ?
         //TODO установить city.
        return address;
     }
@@ -82,9 +82,20 @@ public class ResponseHHentity {
            salary.setStringTo(item.getSalary().getTo());
            salary.setGross(item.getSalary().isGross());
            salary.setCurrency(item.getSalary().getCurrency());
-
        }
        return salary;
+    }
+
+
+    public Employer createEmployer (Item item){
+            Employer employer = new Employer();
+            if (item.getEmployer() != null){
+                employer.setAccredited_it_employer(item.getEmployer().isAccreditedItEmployer());
+                employer.setUrl(item.getEmployer().getUrl());
+                employer.setTrusted(item.getEmployer().isTrusted());
+                employer.setName(item.getEmployer().getName());
+            }
+            return employer;
     }
 
     public Schedule createShedule (Item item) {
@@ -109,7 +120,7 @@ public class ResponseHHentity {
        vacancy.setAddress(createAddress(item));
        vacancy.setArea(createArea(item));
        vacancy.setContacts(createContacts(item));
-       // vacancy.setMetroName(createMetro(item));
+       vacancy.setEmployer(createEmployer(item));
        vacancy.setSalary(createSalary(item));
        vacancy.setProfessionalRole(createProfessionalRole(item));
        vacancy.setSchedule(createShedule(item));

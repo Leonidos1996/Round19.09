@@ -50,6 +50,10 @@ public class Vacancy {
     @JoinColumn(foreignKey = @ForeignKey(name = "type_id"))
     private Type type;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(foreignKey = @ForeignKey(name = "employer_id"))
+    private Employer employer;
+
 
 
 }
