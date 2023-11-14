@@ -11,6 +11,7 @@ import projectHHFromLeonid.tracker.dao.repos.VacancyRepo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HHIntegrationService {

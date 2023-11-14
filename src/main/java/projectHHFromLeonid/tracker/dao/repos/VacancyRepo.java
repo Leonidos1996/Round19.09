@@ -6,4 +6,5 @@ import projectHHFromLeonid.tracker.dao.entity.Vacancy;
 
 @Repository
 public interface VacancyRepo extends CrudRepository<Vacancy, Integer> {
+
 }

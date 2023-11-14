@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,6 +24,12 @@ public class Metro {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    /**
+     * К задаче исключения дублей: как первый вариант, проверять дубль / не дубль можно по айдишке, которую HH пихает в
+     * свой респонс. Нам эту айдишку нужно хранить
+     */
+    private String naturalId;
 
     @Column
     private String name;
