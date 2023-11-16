@@ -7,11 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import projectHHFromLeonid.tracker.dao.entity.Vacancy;
+import projectHHFromLeonid.tracker.dao.repos.MetroRepo;
 import projectHHFromLeonid.tracker.dao.repos.VacancyRepo;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class HHIntegrationService {
@@ -20,13 +19,15 @@ public class HHIntegrationService {
     private RestTemplate restTemplate;
     private VacancyRepo vacancyRepo;
     private ResponseHHentity responseHHentity;
+    private MetroRepo metroRepo;
 
     public HHIntegrationService(
             @Qualifier("hh_resttemplate") RestTemplate restTemplate,
             VacancyRepo vacancyRepo,
-            ResponseHHentity responseHHentity) {
+            ResponseHHentity responseHHentity, MetroRepo metroRepo) {
         this.restTemplate = restTemplate;
         this.vacancyRepo = vacancyRepo;
+        this.metroRepo = metroRepo;
         this.responseHHentity = responseHHentity;
     }
 
@@ -51,6 +52,7 @@ public class HHIntegrationService {
         for (ResponseHH response : responses) {
             for (Item item : response.getItems()) {
                 Vacancy vacancy = responseHHentity.createVacancies(item);
+
                 vacancyRepo.save(vacancy);
             }
         }

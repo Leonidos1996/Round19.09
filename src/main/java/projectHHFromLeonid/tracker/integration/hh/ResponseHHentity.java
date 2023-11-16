@@ -14,9 +14,11 @@ import projectHHFromLeonid.tracker.dao.entity.Salary;
 import projectHHFromLeonid.tracker.dao.entity.Schedule;
 import projectHHFromLeonid.tracker.dao.entity.Type;
 import projectHHFromLeonid.tracker.dao.entity.Vacancy;
+import projectHHFromLeonid.tracker.dao.repos.MetroRepo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 //TODO: переименовать класс, сейчас его имя не говорит ни о чем, за что он отвечает
@@ -35,11 +37,81 @@ public class ResponseHHentity {
        if (item.getAddress() != null){
            address.setBuilding(item.getAddress().getBuilding());
            address.setCity(item.getAddress().getCity());
-           List<Metro> metroList = new ArrayList<Metro>();
+           List<Metro> metroList = new ArrayList<>();
                for  (MetroName metroName : item.getAddress().getMetroStations()) {
                    Metro newMetro = new Metro();
                    newMetro.setName(metroName.getName());
-                   metroList.add(newMetro);
+                   MetroRepo metroRepo1 = new MetroRepo() {
+                       @Override
+                       public Metro findFirstByNaturalId(String naturalId) {
+                           return null;
+                       }
+
+                       @Override
+                       public <S extends Metro> S save(S entity) {
+                           return null;
+                       }
+
+                       @Override
+                       public <S extends Metro> Iterable<S> saveAll(Iterable<S> entities) {
+                           return null;
+                       }
+
+                       @Override
+                       public Optional<Metro> findById(Integer integer) {
+                           return Optional.empty();
+                       }
+
+                       @Override
+                       public boolean existsById(Integer integer) {
+                           return false;
+                       }
+
+                       @Override
+                       public Iterable<Metro> findAll() {
+                           return null;
+                       }
+
+                       @Override
+                       public Iterable<Metro> findAllById(Iterable<Integer> integers) {
+                           return null;
+                       }
+
+                       @Override
+                       public long count() {
+                           return 0;
+                       }
+
+                       @Override
+                       public void deleteById(Integer integer) {
+
+                       }
+
+                       @Override
+                       public void delete(Metro entity) {
+
+                       }
+
+                       @Override
+                       public void deleteAllById(Iterable<? extends Integer> integers) {
+
+                       }
+
+                       @Override
+                       public void deleteAll(Iterable<? extends Metro> entities) {
+
+                       }
+
+                       @Override
+                       public void deleteAll() {
+
+                       }
+                   };
+                   if (metroRepo1 != metroName){
+                       newMetro.setNaturalId(metroName.getStationId());
+                       metroList.add(newMetro);
+                   }
+
            }
        }
         //TODO установить city.

@@ -101,6 +101,8 @@ components:
           type: string
         name:
           type: string
+        station_id:
+          type: string
     Contacts:
       type: object
       properties:
