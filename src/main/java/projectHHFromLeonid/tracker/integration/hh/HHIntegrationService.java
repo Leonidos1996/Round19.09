@@ -18,17 +18,17 @@ public class HHIntegrationService {
 
     private RestTemplate restTemplate;
     private VacancyRepo vacancyRepo;
-    private ResponseHHentity responseHHentity;
+    private EntityBuilder entityBuilder;
     private MetroRepo metroRepo;
 
     public HHIntegrationService(
             @Qualifier("hh_resttemplate") RestTemplate restTemplate,
             VacancyRepo vacancyRepo,
-            ResponseHHentity responseHHentity, MetroRepo metroRepo) {
+            EntityBuilder entityBuilder, MetroRepo metroRepo) {
         this.restTemplate = restTemplate;
         this.vacancyRepo = vacancyRepo;
         this.metroRepo = metroRepo;
-        this.responseHHentity = responseHHentity;
+        this.entityBuilder = entityBuilder;
     }
 
     public void downloadAndSaveVacancies(){
@@ -51,7 +51,7 @@ public class HHIntegrationService {
         //Берем каждый респонс и для каждого Item создаем вакансию и сохраняем ее в базу данных
         for (ResponseHH response : responses) {
             for (Item item : response.getItems()) {
-                Vacancy vacancy = responseHHentity.createVacancies(item);
+                Vacancy vacancy = entityBuilder.createVacancies(item);
 
                 vacancyRepo.save(vacancy);
             }

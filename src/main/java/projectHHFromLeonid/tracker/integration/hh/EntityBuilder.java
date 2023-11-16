@@ -18,12 +18,18 @@ import projectHHFromLeonid.tracker.dao.repos.MetroRepo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
-//TODO: переименовать класс, сейчас его имя не говорит ни о чем, за что он отвечает
-//TODO: убрать лишние пустые строки
-public class ResponseHHentity {
+public class EntityBuilder {
+
+    //Для инжекта:
+    // 1. объявляем бин в классе
+    // 2. Прокидывваем его в конструктор
+    private final MetroRepo metroRepo;
+
+    public EntityBuilder(MetroRepo metroRepo) {
+        this.metroRepo = metroRepo;
+    }
 
 
    public Area createArea(Item item) {
@@ -38,84 +44,28 @@ public class ResponseHHentity {
            address.setBuilding(item.getAddress().getBuilding());
            address.setCity(item.getAddress().getCity());
            List<Metro> metroList = new ArrayList<>();
-               for  (MetroName metroName : item.getAddress().getMetroStations()) {
-                   Metro newMetro = new Metro();
-                   newMetro.setName(metroName.getName());
-                   MetroRepo metroRepo1 = new MetroRepo() {
-                       @Override
-                       public Metro findFirstByNaturalId(String naturalId) {
-                           return null;
-                       }
-
-                       @Override
-                       public <S extends Metro> S save(S entity) {
-                           return null;
-                       }
-
-                       @Override
-                       public <S extends Metro> Iterable<S> saveAll(Iterable<S> entities) {
-                           return null;
-                       }
-
-                       @Override
-                       public Optional<Metro> findById(Integer integer) {
-                           return Optional.empty();
-                       }
-
-                       @Override
-                       public boolean existsById(Integer integer) {
-                           return false;
-                       }
-
-                       @Override
-                       public Iterable<Metro> findAll() {
-                           return null;
-                       }
-
-                       @Override
-                       public Iterable<Metro> findAllById(Iterable<Integer> integers) {
-                           return null;
-                       }
-
-                       @Override
-                       public long count() {
-                           return 0;
-                       }
-
-                       @Override
-                       public void deleteById(Integer integer) {
-
-                       }
-
-                       @Override
-                       public void delete(Metro entity) {
-
-                       }
-
-                       @Override
-                       public void deleteAllById(Iterable<? extends Integer> integers) {
-
-                       }
-
-                       @Override
-                       public void deleteAll(Iterable<? extends Metro> entities) {
-
-                       }
-
-                       @Override
-                       public void deleteAll() {
-
-                       }
-                   };
-                   if (metroRepo1 != metroName){
-                       newMetro.setNaturalId(metroName.getStationId());
-                       metroList.add(newMetro);
-                   }
-
-           }
+               for  (MetroName hhMetro : item.getAddress().getMetroStations()) {
+                   Metro metro = createMetro(hhMetro);
+                   metroList.add(metro);
+                   metro.setName(hhMetro.getName());
+               }
        }
-        //TODO установить city.
        return address;
+    }
+
+    public Metro createMetro(MetroName metroName) {
+        //Ищем в БД метро naturalId из ХХ
+        Metro metroFromDatabase = metroRepo.findFirstByNaturalId(metroName.getStationId());
+        if (metroFromDatabase == null) {
+            //Если вернулся null, то такого метро нет в БД. Создаем новое и отдаем его
+            Metro metro = new Metro();
+            metro.setName(metroName.getName());
+            metro.setNaturalId(metroName.getStationId());
+            return metro;
+        } else {
+            //Если из БД вернулось метро, то используем его
+            return metroFromDatabase;
+        }
     }
 
     public Contacts createContacts (Item item) {
@@ -124,11 +74,11 @@ public class ResponseHHentity {
             contacts.setEmail(item.getContacts().getEmail());
             contacts.setName(item.getContacts().getName());
             List<Phone> phoneList = new ArrayList<>();
-                for (integration.projectHHFromLeonid.tracker.PhoneDTO phoneName : item.getContacts().getPhones()){
-                    Phone newPhones = new Phone();
-                    newPhones.setNumber(phoneName.getNumber());
-                    phoneList.add(newPhones);
-               }
+//                for (integration.projectHHFromLeonid.tracker.PhoneDTO phoneName : item.getContacts().getPhones()){
+//                    Phone newPhones = new Phone();
+//                    newPhones.setNumber(phoneName.getNumber());
+//                    phoneList.add(newPhones);
+//               }
         }
         //TODO почему установил только email
         return contacts;
