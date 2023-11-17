@@ -150,6 +150,8 @@ components:
           type: boolean
         url:
           type: string
+        naturalId:
+          type: string
     Insider_interview:
       type: object
       properties:

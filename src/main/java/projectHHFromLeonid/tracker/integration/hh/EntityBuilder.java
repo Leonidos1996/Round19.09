@@ -28,7 +28,6 @@ import projectHHFromLeonid.tracker.dao.repos.TypeRepo;
 import projectHHFromLeonid.tracker.dao.repos.VacancyRepo;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -177,15 +176,20 @@ public class EntityBuilder {
         return metro2;
     }
 
-    public Employer createEmployer(Item item) {
-        Employer employer = new Employer();
-        if (item.getEmployer() != null) {
-            employer.setAccredited_it_employer(item.getEmployer().isAccreditedItEmployer());
-            employer.setUrl(item.getEmployer().getUrl());
-            employer.setTrusted(item.getEmployer().isTrusted());
-            employer.setName(item.getEmployer().getName());
+    public Employer createEmployer(integration.projectHHFromLeonid.tracker.Employer employerName) {
+        Employer employer1 = new Employer();
+        if (employerName != null) {
+            Employer employerFromDataBase = employerRepo.findFirstByNaturalId(employerName.getNaturalId());
+            if(employerFromDataBase == null){
+                Employer employerNew = new Employer();
+                employerNew.setAccredited_it_employer(employerName.isAccreditedItEmployer());
+                employerNew.setUrl(employerName.getUrl());
+                employerNew.setTrusted(employerName.isTrusted());
+                employerNew.setName(employerName.getName());
+            }
+
         }
-        return employer;
+        return employer1;
     }
 
     public Schedule createShedule(Item item) {
@@ -209,9 +213,9 @@ public class EntityBuilder {
         vacancy.setAddress(createAddress(item));
         vacancy.setArea(createArea(item.getArea()));
         vacancy.setContacts(createContacts(item));
-        vacancy.setEmployer(createEmployer(item));
+       // vacancy.setEmployer(createEmployer(item));
         vacancy.setSalary(createSalary(item));
-        vacancy.setProfessionalRole(createProfessionalRole(item));
+      //  vacancy.setProfessionalRole(createProfessionalRole(item));
         vacancy.setSchedule(createShedule(item));
         vacancy.setType(createType(item));
         return vacancy;

@@ -41,6 +41,8 @@ public class Employer {
     @Column
     private String url;
 
+    private String naturalId;
+
 
     @OneToMany(mappedBy = "employer", fetch = FetchType.LAZY)
     private Set<Vacancy> vacancies = new HashSet<>();
