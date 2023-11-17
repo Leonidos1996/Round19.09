@@ -17,6 +17,8 @@ public class ProfessionalRole {
     @GeneratedValue (strategy = GenerationType.AUTO)
     private Integer id;
 
+    private String naturalId;
+
     @Column
     private String name;
 

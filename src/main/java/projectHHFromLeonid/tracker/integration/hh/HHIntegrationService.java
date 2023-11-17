@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import projectHHFromLeonid.tracker.dao.entity.Vacancy;
-import projectHHFromLeonid.tracker.dao.repos.MetroRepo;
 import projectHHFromLeonid.tracker.dao.repos.VacancyRepo;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +18,13 @@ public class HHIntegrationService {
     private RestTemplate restTemplate;
     private VacancyRepo vacancyRepo;
     private EntityBuilder entityBuilder;
-    private MetroRepo metroRepo;
 
     public HHIntegrationService(
             @Qualifier("hh_resttemplate") RestTemplate restTemplate,
             VacancyRepo vacancyRepo,
-            EntityBuilder entityBuilder, MetroRepo metroRepo) {
+            EntityBuilder entityBuilder) {
         this.restTemplate = restTemplate;
         this.vacancyRepo = vacancyRepo;
-        this.metroRepo = metroRepo;
         this.entityBuilder = entityBuilder;
     }
 

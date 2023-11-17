@@ -16,11 +16,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@Table (name = "AREA")
+@Table(name = "AREA")
 //TODO: добавить все поля которые приходят от HH. id в том числе
 //TODO убрать лишние строки
 public class Area {
@@ -32,10 +33,11 @@ public class Area {
     @Column
     private String name;
 
+    private String naturalId;
+
     @OneToMany(mappedBy = "area", fetch = FetchType.LAZY)
     //TODO: убрать, посскольку у нас двунаправленная свзяь join column здесь не нужен
     @JoinColumn(name = "fk_vacancies")
     private List<Vacancy> vacancies = new ArrayList<>();
-
 }
 

@@ -164,6 +164,8 @@ components:
           type: integer
         name:
           type: string
+        naturalId:
+          type: string
     SalaryDTO:
       type: object
       properties:
