@@ -11,7 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
@@ -29,6 +28,8 @@ public class Type {
 
     @Column
     private String name;
+
+    private String naturalId;
 
     @OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
     //TODO: убрать, посскольку у нас двунаправленная свзяь join column здесь не нужен

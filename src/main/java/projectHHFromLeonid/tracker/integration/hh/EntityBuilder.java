@@ -187,16 +187,24 @@ public class EntityBuilder {
                 employerNew.setTrusted(employerName.isTrusted());
                 employerNew.setName(employerName.getName());
             }
-
         }
         return employer1;
     }
 
-    public Schedule createShedule(Item item) {
+    public Schedule createShedule(integration.projectHHFromLeonid.tracker.Schedule scheduleName) {
         Schedule schedule = new Schedule();
-        if (item.getSchedule() != null) {
-            schedule.setName(item.getSchedule().getName());
-        }
+
+            if (scheduleName != null) {
+                Schedule scheduleNew = new Schedule();
+                if (){
+
+                }
+
+                schedule.setName(item.getSchedule().getName());
+            }
+
+
+
         return schedule;
     }
 

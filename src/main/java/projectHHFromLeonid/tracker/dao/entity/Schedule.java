@@ -30,6 +30,8 @@ public class Schedule {
     @Column
     private String name;
 
+    private String naturalId;
+
     @OneToMany(mappedBy = "shedule", fetch = FetchType.LAZY)
     //TODO: убрать, посскольку у нас двунаправленная свзяь join column здесь не нужен
     private List<Vacancy> vacancies = new ArrayList<>();
