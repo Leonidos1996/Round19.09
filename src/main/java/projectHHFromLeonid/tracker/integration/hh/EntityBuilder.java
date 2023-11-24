@@ -76,15 +76,19 @@ public class EntityBuilder {
     }
 
     public Area createArea(integration.projectHHFromLeonid.tracker.Area areaName) {
-        Area areaFromDates = areaRepo.findFirstByNaturalId(areaName.getName());
-        if (areaName != null && areaFromDates == null) {
-            Area area = new Area();
-            area.setName(areaName.getName());
-            area.setNaturalId(area.getNaturalId());
-            return area;
-        } else {
-            return areaFromDates;
+
+        if (areaName != null){
+            Area areaFromDates = areaRepo.findFirstByNaturalId(areaName.getName());
+            if (areaFromDates == null) {
+                Area area = new Area();
+                area.setName(areaName.getName());
+                area.setNaturalId(area.getNaturalId());
+                return area;
+            } else {
+                return areaFromDates;
+            }
         }
+            return null;
     }
 
 
@@ -154,7 +158,7 @@ public class EntityBuilder {
         }
         return profList;
         }
-        return profList;
+        return null;
     }
 
     public Metro createMetro(MetroName metroName) {
@@ -177,7 +181,7 @@ public class EntityBuilder {
     }
 
     public Employer createEmployer(integration.projectHHFromLeonid.tracker.Employer employerName) {
-        Employer employer1 = new Employer();
+         Employer employer1 = new Employer();
         if (employerName != null) {
             Employer employerFromDataBase = employerRepo.findFirstByNaturalId(employerName.getNaturalId());
             if(employerFromDataBase == null){
@@ -186,6 +190,9 @@ public class EntityBuilder {
                 employerNew.setUrl(employerName.getUrl());
                 employerNew.setTrusted(employerName.isTrusted());
                 employerNew.setName(employerName.getName());
+                return employerNew;
+            } else {
+                return employerFromDataBase;
             }
         }
         return employer1;
@@ -193,18 +200,10 @@ public class EntityBuilder {
 
     public Schedule createShedule(integration.projectHHFromLeonid.tracker.Schedule scheduleName) {
         Schedule schedule = new Schedule();
-
             if (scheduleName != null) {
                 Schedule scheduleNew = new Schedule();
-                if (){
-
-                }
-
-                schedule.setName(item.getSchedule().getName());
+                schedule.setName(scheduleName.getName());
             }
-
-
-
         return schedule;
     }
 
@@ -221,10 +220,10 @@ public class EntityBuilder {
         vacancy.setAddress(createAddress(item));
         vacancy.setArea(createArea(item.getArea()));
         vacancy.setContacts(createContacts(item));
-       // vacancy.setEmployer(createEmployer(item));
+        vacancy.setEmployer(createEmployer(item.getEmployer()));
         vacancy.setSalary(createSalary(item));
-      //  vacancy.setProfessionalRole(createProfessionalRole(item));
-        vacancy.setSchedule(createShedule(item));
+        vacancy.setProfessionalRole(createProfessionalRole(item.getProfessionalRoles()));
+        vacancy.setSchedule(createShedule(item.getSchedule()));
         vacancy.setType(createType(item));
         return vacancy;
     }

@@ -17,7 +17,7 @@ public class Contacts {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     @Column
     private Integer id;
@@ -28,6 +28,7 @@ public class Contacts {
     @Column
     private String name;
 
+    private String naturalId;
 
 
     @OneToMany(mappedBy = "contacts", fetch = FetchType.LAZY)

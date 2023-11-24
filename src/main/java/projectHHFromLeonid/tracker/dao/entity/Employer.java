@@ -1,5 +1,6 @@
 
 package projectHHFromLeonid.tracker.dao.entity;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,8 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @NoArgsConstructor
@@ -24,10 +25,8 @@ import java.util.Set;
 public class Employer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
-    @Column
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Column
     private Boolean accredited_it_employer;
@@ -43,8 +42,6 @@ public class Employer {
 
     private String naturalId;
 
-
     @OneToMany(mappedBy = "employer", fetch = FetchType.LAZY)
-    private Set<Vacancy> vacancies = new HashSet<>();
-
+    private List<Vacancy> vacancies = new ArrayList<>();
 }

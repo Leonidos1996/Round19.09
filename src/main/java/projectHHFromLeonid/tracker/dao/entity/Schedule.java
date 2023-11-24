@@ -24,7 +24,7 @@ import java.util.List;
 public class Schedule {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
@@ -32,7 +32,7 @@ public class Schedule {
 
     private String naturalId;
 
-    @OneToMany(mappedBy = "shedule", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "schedule", fetch = FetchType.LAZY)
     //TODO: убрать, посскольку у нас двунаправленная свзяь join column здесь не нужен
     private List<Vacancy> vacancies = new ArrayList<>();
 

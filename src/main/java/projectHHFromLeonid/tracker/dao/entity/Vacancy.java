@@ -18,7 +18,7 @@ import java.util.List;
 public class Vacancy {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
@@ -54,6 +54,6 @@ public class Vacancy {
     @JoinColumn(foreignKey = @ForeignKey(name = "employer_id"))
     private Employer employer;
 
-
+    private String naturalId;
 
 }

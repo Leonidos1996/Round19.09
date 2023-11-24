@@ -14,7 +14,7 @@ import java.util.List;
 //TODO убрать лишние строки
 public class ProfessionalRole {
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String naturalId;

@@ -29,7 +29,6 @@ public class HHIntegrationService {
     }
 
     public void downloadAndSaveVacancies(){
-
         //Создается список ключевых слов
         List<String> keyWords = new ArrayList<>();
         keyWords.add("Java");

@@ -25,7 +25,7 @@ import java.util.List;
 public class Salary {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
@@ -40,9 +40,9 @@ public class Salary {
     @Column
     private String stringTo;
 
+    private String naturalId;
+
     @OneToMany(mappedBy = "salary", fetch = FetchType.LAZY)
     //TODO: убрать, поскольку у нас двунаправленная свзяь join column здесь не нужен
     private List<Vacancy> vacancies = new ArrayList<>();
-
-
 }

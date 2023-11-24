@@ -143,7 +143,7 @@ components:
         accredited_it_employer:
           type: boolean
         id:
-          type: string
+          type: integer
         name:
           type: string
         trusted:

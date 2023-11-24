@@ -29,7 +29,7 @@ import java.util.Set;
 //TODO: добавить many-to-many Metro
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
@@ -40,6 +40,8 @@ public class Address {
 
     @Column
     private String description;
+
+    private String naturalId;
 
 
     @OneToMany(fetch = FetchType.LAZY)

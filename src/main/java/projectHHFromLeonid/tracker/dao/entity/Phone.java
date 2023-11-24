@@ -21,11 +21,13 @@ import java.util.List;
 public class Phone {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
     private String number;
+
+    private String naturalId;
 
     @ManyToMany(mappedBy = "metro_stations")
     private List<Address> addressList = new ArrayList<>();
