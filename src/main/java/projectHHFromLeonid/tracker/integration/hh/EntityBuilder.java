@@ -142,23 +142,25 @@ public class EntityBuilder {
 
     public List<ProfessionalRole> createProfessionalRole(List<integration.projectHHFromLeonid.tracker.ProfessionalRole> professionalRoleNameList) {
         List<ProfessionalRole> profList = new ArrayList<ProfessionalRole>();
-        if (professionalRoleNameList != null) {
 
         //из ответа хх мы проходимся коллекцией листа? Далее вставляем
         for (integration.projectHHFromLeonid.tracker.ProfessionalRole role : professionalRoleNameList) {
-            ProfessionalRole pRoleFromDataBase = professionalRoleRepo.findFirstByNaturalId(role.getNaturalId());
+            //проходимся по всему мешку мандаринов
+            ProfessionalRole pRoleFromDataBase = professionalRoleRepo.findFirstByNaturalId(role.getName());
+            // далее объявляем объект нового имени в бд
             if (pRoleFromDataBase == null) {
+                //если база не пустая, то создаем новый объект роли, если что-то есть, возвращаем это значение
                 ProfessionalRole newRole = new ProfessionalRole();
                 newRole.setName(role.getName());
                 profList.add(newRole);
-                return (List<ProfessionalRole>) newRole;
+                // return profList;
             } else {
                 return (List<ProfessionalRole>) pRoleFromDataBase;
             }
         }
+            // return profList;
+
         return profList;
-        }
-        return null;
     }
 
     public Metro createMetro(MetroName metroName) {
@@ -227,5 +229,4 @@ public class EntityBuilder {
         vacancy.setType(createType(item));
         return vacancy;
     }
-
 }
