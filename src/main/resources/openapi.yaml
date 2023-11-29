@@ -30,6 +30,8 @@ components:
     Item:
       type: object
       properties:
+        id:
+          type: string
         accept_incomplete_resumes:
           type: boolean
         alternate_url:
@@ -47,32 +49,32 @@ components:
         Sort_point_distance:
           type: boolean
         area:
-          $ref: "#/components/schemas/Area"
+          $ref: "#/components/schemas/AreaDTO"
         address:
-          $ref: "#/components/schemas/Address"
+          $ref: "#/components/schemas/AddressDTO"
         contacts:
-          $ref: "#/components/schemas/Contacts"
+          $ref: "#/components/schemas/ContactsDTO"
         counters:
-          $ref: "#/components/schemas/Counters"
+          $ref: "#/components/schemas/CountersDTO"
         department:
-          $ref: "#/components/schemas/Department"
+          $ref: "#/components/schemas/DepartmentDTO"
         employer:
-          $ref: "#/components/schemas/Employer"
+          $ref: "#/components/schemas/EmployerDTO"
         insider_interview:
-          $ref: "#/components/schemas/Insider_interview"
+          $ref: "#/components/schemas/InsiderInterviewDTO"
         salary:
           $ref: "#/components/schemas/SalaryDTO"
         schedule:
-          $ref: "#/components/schemas/Schedule"
+          $ref: "#/components/schemas/ScheduleDTO"
         snippet:
-          $ref: "#/components/schemas/Snippet"
+          $ref: "#/components/schemas/SnippetDTO"
         type:
-          $ref: "#/components/schemas/Type"
+          $ref: "#/components/schemas/TypeDTO"
         professional_roles:
           type: array
           items:
-            $ref: "#/components/schemas/Professional_role"
-    Area:
+            $ref: "#/components/schemas/ProfessionalRoleDTO"
+    AreaDTO:
       type: object
       properties:
         id:
@@ -81,7 +83,7 @@ components:
           type: string
         url:
           type: string
-    Address:
+    AddressDTO:
       type: object
       properties:
         id:
@@ -93,17 +95,17 @@ components:
         metro_stations:
           type: array
           items:
-            $ref: "#/components/schemas/MetroName"
-    MetroName:
+            $ref: "#/components/schemas/MetroDTO"
+    MetroDTO:
       type: object
       properties:
         id:
           type: string
-        name:
+        station_name:
           type: string
         station_id:
           type: string
-    Contacts:
+    ContactsDTO:
       type: object
       properties:
         name:
@@ -125,19 +127,19 @@ components:
           type: string
         number:
           type: string
-    Counters:
+    CountersDTO:
       type: object
       properties:
         responses:
           type: integer
-    Department:
+    DepartmentDTO:
       type: object
       properties:
         id:
           type: string
         name:
           type: string
-    Employer:
+    EmployerDTO:
       type: object
       properties:
         accredited_it_employer:
@@ -152,14 +154,14 @@ components:
           type: string
         naturalId:
           type: string
-    Insider_interview:
+    InsiderInterviewDTO:
       type: object
       properties:
         id:
           type: string
         url:
           type: string
-    Professional_role:
+    ProfessionalRoleDTO:
       type: object
       properties:
         id:
@@ -179,7 +181,7 @@ components:
           type: boolean
         to:
           type: string
-    Schedule:
+    ScheduleDTO:
       type: object
       properties:
         id:
@@ -188,14 +190,14 @@ components:
           type: string
         naturalId:
           type: string
-    Snippet:
+    SnippetDTO:
       type: object
       properties:
         requirement:
           type: string
         responsibility:
           type: string
-    Type:
+    TypeDTO:
       type: object
       properties:
         id:

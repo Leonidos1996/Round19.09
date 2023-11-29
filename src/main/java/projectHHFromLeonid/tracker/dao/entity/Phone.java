@@ -29,7 +29,7 @@ public class Phone {
 
     private String naturalId;
 
-    @ManyToMany(mappedBy = "metro_stations")
+    @ManyToMany(mappedBy = "metroStations")
     private List<Address> addressList = new ArrayList<>();
 
 }

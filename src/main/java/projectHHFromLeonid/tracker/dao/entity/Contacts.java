@@ -18,8 +18,6 @@ public class Contacts {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column
     private Integer id;
 
     @Column

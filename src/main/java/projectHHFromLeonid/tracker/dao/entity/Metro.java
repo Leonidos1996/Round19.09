@@ -3,6 +3,8 @@ package projectHHFromLeonid.tracker.dao.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,6 +35,6 @@ public class Metro {
     @Column
     private String name;
 
-    @ManyToMany(mappedBy = "metro_stations")
+    @ManyToMany(mappedBy = "metroStations", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Address> addressList = new ArrayList<>();
 }

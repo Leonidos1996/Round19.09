@@ -1,8 +1,15 @@
 package projectHHFromLeonid.tracker.integration.hh;
 
+import integration.projectHHFromLeonid.tracker.AreaDTO;
+import integration.projectHHFromLeonid.tracker.EmployerDTO;
 import integration.projectHHFromLeonid.tracker.Item;
-import integration.projectHHFromLeonid.tracker.MetroName;
+import integration.projectHHFromLeonid.tracker.MetroDTO;
 import integration.projectHHFromLeonid.tracker.PhoneDTO;
+
+import integration.projectHHFromLeonid.tracker.ProfessionalRoleDTO;
+import integration.projectHHFromLeonid.tracker.ScheduleDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import projectHHFromLeonid.tracker.dao.entity.Address;
 import projectHHFromLeonid.tracker.dao.entity.Area;
@@ -32,6 +39,7 @@ import java.util.List;
 
 @Service
 public class EntityBuilder {
+    private static final Logger LOGGER = LoggerFactory.getLogger(EntityBuilder.class);
 
     //Для инжекта:
     // 1. объявляем бин в классе
@@ -75,16 +83,19 @@ public class EntityBuilder {
         return salary;
     }
 
-    public Area createArea(integration.projectHHFromLeonid.tracker.Area areaName) {
+    public Area createArea(AreaDTO areaDTO) {
 
-        if (areaName != null){
-            Area areaFromDates = areaRepo.findFirstByNaturalId(areaName.getName());
+        if (areaDTO != null){
+            LOGGER.info("Work with area name - [{}]", areaDTO.getName());
+            Area areaFromDates = areaRepo.findFirstByNaturalId(areaDTO.getId());
             if (areaFromDates == null) {
+                LOGGER.info("Area with id - [{}] not found in db", areaDTO.getName());
                 Area area = new Area();
-                area.setName(areaName.getName());
-                area.setNaturalId(area.getNaturalId());
+                area.setName(areaDTO.getName());
+                area.setNaturalId(areaDTO.getId());
                 return area;
             } else {
+                LOGGER.info("Area with id - [{}] was found in db");
                 return areaFromDates;
             }
         }
@@ -93,23 +104,34 @@ public class EntityBuilder {
 
 
     public Address createAddress(Item item) {
-        Address address = new Address();
+        //Пустой Address не имеет смысла возвращать, поэтому вернем объект только в случае если он нам пришел
+        //иначе null
         if (item.getAddress() != null) {
+            Address address = new Address();
             address.setBuilding(item.getAddress().getBuilding());
             address.setCity(item.getAddress().getCity());
-            List<Metro> metroList = new ArrayList<>();
-            for (MetroName hhMetro : item.getAddress().getMetroStations()) {
-                Metro metro = createMetro(hhMetro);
-                metroList.add(metro);
+
+            //Проверяем есть ли что-то в списке с Metro
+            if (!item.getAddress().getMetroStations().isEmpty()) {
+                //Создаем метро лист в случае если что-то есть
+                List<Metro> metroList = new ArrayList<>();
+                for (MetroDTO hhMetro : item.getAddress().getMetroStations()) {
+                    Metro metro = createMetro(hhMetro);
+                    metroList.add(metro);
+                }
+                address.getMetroStations().addAll(metroList);
             }
+            return address;
         }
-        return address;
+        return null;
     }
 
 
 
     public Phone createPhone(PhoneDTO phoneName) {
+        //TODO: здесь ошибки нужно переписать
         Phone phone1 = new Phone();
+        //TODO: В чем смысл этой проверки?
         if (phoneName != null) {
             Phone phoneFromDataBase = phoneRepo.findFirstByNaturalId(phoneName.getNumber());
             if (phoneFromDataBase == null) {
@@ -120,69 +142,69 @@ public class EntityBuilder {
                 return phoneFromDataBase;
             }
         }
+        //TODO: Почему из метода возращается пустой phone1, а не телефон из базы или заново созданный
         return phone1;
 
     }
 
+    //TODO: Переписать как createAddress
     public Contacts createContacts(Item item) {
         Contacts contacts = new Contacts();
         if (item.getContacts() != null) {
             contacts.setEmail(item.getContacts().getEmail());
             contacts.setName(item.getContacts().getName());
             List<Phone> phoneList = new ArrayList<>();
-            for (integration.projectHHFromLeonid.tracker.PhoneDTO phoneName : item.getContacts().getPhones()) {
-                Phone phone = createPhone(phoneName);
+
+            for (PhoneDTO phoneDTO : item.getContacts().getPhones()) {
+                Phone phone = createPhone(phoneDTO);
                 phoneList.add(phone);
             }
+            contacts.getPhones().addAll(phoneList);
         }
-        //TODO почему установил только email
         return contacts;
     }
 
 
-    public List<ProfessionalRole> createProfessionalRole(List<integration.projectHHFromLeonid.tracker.ProfessionalRole> professionalRoleNameList) {
+    public List<ProfessionalRole> createProfessionalRole(List<ProfessionalRoleDTO> dtoList) {
         List<ProfessionalRole> profList = new ArrayList<ProfessionalRole>();
-
         //из ответа хх мы проходимся коллекцией листа? Далее вставляем
-        for (integration.projectHHFromLeonid.tracker.ProfessionalRole role : professionalRoleNameList) {
+        for (ProfessionalRoleDTO role : dtoList) {
             //проходимся по всему мешку мандаринов
-            ProfessionalRole pRoleFromDataBase = professionalRoleRepo.findFirstByNaturalId(role.getName());
+            ProfessionalRole dbRole = professionalRoleRepo.findFirstByNaturalId(role.getName());
             // далее объявляем объект нового имени в бд
-            if (pRoleFromDataBase == null) {
+            if (dbRole == null) {
                 //если база не пустая, то создаем новый объект роли, если что-то есть, возвращаем это значение
                 ProfessionalRole newRole = new ProfessionalRole();
                 newRole.setName(role.getName());
                 profList.add(newRole);
                 // return profList;
             } else {
-                return (List<ProfessionalRole>) pRoleFromDataBase;
+                profList.add(dbRole);
             }
         }
-            // return profList;
-
         return profList;
     }
 
-    public Metro createMetro(MetroName metroName) {
-        Metro metro2 = new Metro();
+    public Metro createMetro(MetroDTO metroDTO) {
         //Ищем в БД метро naturalId из ХХ
-        if (metroName != null) {
-            Metro metroFromDatabase = metroRepo.findFirstByNaturalId(metroName.getStationId());
-            if (metroFromDatabase == null) {
+        if (metroDTO != null) {
+            Metro dbMetro = metroRepo.findFirstByNaturalId(metroDTO.getStationId());
+            if (dbMetro == null) {
                 //Если вернулся null, то такого метро нет в БД. Создаем новое и отдаем его
                 Metro metro = new Metro();
-                metro.setName(metroName.getName());
-                metro.setNaturalId(metroName.getStationId());
+                metro.setName(metroDTO.getStationName());
+                metro.setNaturalId(metroDTO.getStationId());
                 return metro;
             } else {
                 //Если из БД вернулось метро, то используем его
-                return metroFromDatabase;
+                return dbMetro;
             }
         }
-        return metro2;
+        return null;
     }
 
-    public Employer createEmployer(integration.projectHHFromLeonid.tracker.Employer employerName) {
+    //TODO: переписать, те же ошибки что и в createPhone
+    public Employer createEmployer(EmployerDTO employerName) {
          Employer employer1 = new Employer();
         if (employerName != null) {
             Employer employerFromDataBase = employerRepo.findFirstByNaturalId(employerName.getNaturalId());
@@ -200,15 +222,17 @@ public class EntityBuilder {
         return employer1;
     }
 
-    public Schedule createShedule(integration.projectHHFromLeonid.tracker.Schedule scheduleName) {
-        Schedule schedule = new Schedule();
-            if (scheduleName != null) {
-                Schedule scheduleNew = new Schedule();
-                schedule.setName(scheduleName.getName());
-            }
-        return schedule;
+
+    public Schedule createShedule(ScheduleDTO scheduleDTO) {
+        if (scheduleDTO != null) {
+            Schedule schedule = new Schedule();
+            schedule.setName(scheduleDTO.getName());
+            return schedule;
+        }
+        return null;
     }
 
+    //TODO: переделать как createShedule
     public Type createType(Item item) {
         Type type = new Type();
         if (item.getType() != null) {
@@ -227,6 +251,7 @@ public class EntityBuilder {
         vacancy.setProfessionalRole(createProfessionalRole(item.getProfessionalRoles()));
         vacancy.setSchedule(createShedule(item.getSchedule()));
         vacancy.setType(createType(item));
+        vacancy.setNaturalId(item.getId());
         return vacancy;
     }
 }

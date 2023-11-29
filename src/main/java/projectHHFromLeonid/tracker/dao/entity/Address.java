@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,13 +45,13 @@ public class Address {
     private String naturalId;
 
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     //TODO: убрать, посскольку у нас двунаправленная свзяь join column здесь не нужен
     private List<Vacancy> vacancies = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "address_metro",
             joinColumns = @JoinColumn(name = "address_id"),
             inverseJoinColumns = @JoinColumn(name = "metro_id"))
-    private Set<Metro> metro_stations = new HashSet<>();
+    private Set<Metro> metroStations = new HashSet<>();
 }

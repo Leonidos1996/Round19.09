@@ -9,5 +9,4 @@ import projectHHFromLeonid.tracker.dao.entity.Address;
 public interface AddressRepo extends CrudRepository<Address, Integer> {
 
     Address findFirstByNaturalId(String naturalId);
-
 }
