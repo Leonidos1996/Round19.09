@@ -7,10 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import projectHHFromLeonid.tracker.dao.entity.Vacancy;
 import projectHHFromLeonid.tracker.dao.repos.VacancyRepo;
+import projectHHFromLeonid.tracker.api.VacancyRepositoryForRequiest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +20,7 @@ public class HHIntegrationService {
     private static final Logger LOGGER = LoggerFactory.getLogger(HHIntegrationService.class);
     public static final String BASE_URL = "https://api.hh.ru/vacancies";
 
+    public final VacancyRepositoryForRequiest vacancyRepositoryForRequiest;
     private final RestTemplate restTemplate;
     private final VacancyRepo vacancyRepo;
     private final EntityBuilder entityBuilder;
@@ -27,11 +28,13 @@ public class HHIntegrationService {
     public HHIntegrationService(
             @Qualifier("hh_resttemplate") RestTemplate restTemplate,
             VacancyRepo vacancyRepo,
-            EntityBuilder entityBuilder) {
+            EntityBuilder entityBuilder, VacancyRepositoryForRequiest vacancyRepositoryForRequiest) {
         this.restTemplate = restTemplate;
         this.vacancyRepo = vacancyRepo;
         this.entityBuilder = entityBuilder;
+        this.vacancyRepositoryForRequiest = vacancyRepositoryForRequiest;
     }
+
 
     public void downloadAndSaveVacancies(){
         //Создается список ключевых слов
@@ -43,7 +46,7 @@ public class HHIntegrationService {
         for (String key : keyWords) {
             LOGGER.info("Current word - [{}]", key);
             //проходимся по всем страницам и сохраняем ответ ХХ в список responses
-            for (int i = 1; i < 2; i++) {
+            for (int i = 1; i < 10; i++) {
                 String url = generateUrl(i, 100, key);
                 LOGGER.debug("Current URL - [{}]", url);
                 ResponseEntity<ResponseHH> response = restTemplate.getForEntity(url, ResponseHH.class);

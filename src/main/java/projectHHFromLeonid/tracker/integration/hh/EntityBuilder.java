@@ -85,7 +85,7 @@ public class EntityBuilder {
 
     public Area createArea(AreaDTO areaDTO) {
 
-        if (areaDTO != null){
+        if (areaDTO != null) {
             LOGGER.info("Work with area name - [{}]", areaDTO.getName());
             Area areaFromDates = areaRepo.findFirstByNaturalId(areaDTO.getId());
             if (areaFromDates == null) {
@@ -99,7 +99,7 @@ public class EntityBuilder {
                 return areaFromDates;
             }
         }
-            return null;
+        return null;
     }
 
 
@@ -127,13 +127,31 @@ public class EntityBuilder {
     }
 
 
+    public Metro createMetro(MetroDTO metroDTO) {
+        //Ищем в БД метро naturalId из ХХ
+        if (metroDTO != null) {
+            Metro dbMetro = metroRepo.findFirstByNaturalId(metroDTO.getStationId());
+            if (dbMetro == null) {
+                //Если вернулся null, то такого метро нет в БД. Создаем новое и отдаем его
+                Metro metro = new Metro();
+                metro.setName(metroDTO.getStationName());
+                metro.setNaturalId(metroDTO.getStationId());
+                return metro;
+            } else {
+                //Если из БД вернулось метро, то используем его
+                return dbMetro;
+            }
+        }
+        return null;
+    }
 
     public Phone createPhone(PhoneDTO phoneName) {
         //TODO: здесь ошибки нужно переписать
         Phone phone1 = new Phone();
-        //TODO: В чем смысл этой проверки?
+        //TODO: В чем смысл этой проверки? - проверка на null, если есть, то возвращает пустой объект
         if (phoneName != null) {
             Phone phoneFromDataBase = phoneRepo.findFirstByNaturalId(phoneName.getNumber());
+
             if (phoneFromDataBase == null) {
                 Phone phone = new Phone();
                 phone.setNumber(phoneName.getNumber());
@@ -185,43 +203,6 @@ public class EntityBuilder {
         return profList;
     }
 
-    public Metro createMetro(MetroDTO metroDTO) {
-        //Ищем в БД метро naturalId из ХХ
-        if (metroDTO != null) {
-            Metro dbMetro = metroRepo.findFirstByNaturalId(metroDTO.getStationId());
-            if (dbMetro == null) {
-                //Если вернулся null, то такого метро нет в БД. Создаем новое и отдаем его
-                Metro metro = new Metro();
-                metro.setName(metroDTO.getStationName());
-                metro.setNaturalId(metroDTO.getStationId());
-                return metro;
-            } else {
-                //Если из БД вернулось метро, то используем его
-                return dbMetro;
-            }
-        }
-        return null;
-    }
-
-    //TODO: переписать, те же ошибки что и в createPhone
-    public Employer createEmployer(EmployerDTO employerName) {
-         Employer employer1 = new Employer();
-        if (employerName != null) {
-            Employer employerFromDataBase = employerRepo.findFirstByNaturalId(employerName.getNaturalId());
-            if(employerFromDataBase == null){
-                Employer employerNew = new Employer();
-                employerNew.setAccredited_it_employer(employerName.isAccreditedItEmployer());
-                employerNew.setUrl(employerName.getUrl());
-                employerNew.setTrusted(employerName.isTrusted());
-                employerNew.setName(employerName.getName());
-                return employerNew;
-            } else {
-                return employerFromDataBase;
-            }
-        }
-        return employer1;
-    }
-
 
     public Schedule createShedule(ScheduleDTO scheduleDTO) {
         if (scheduleDTO != null) {
@@ -241,17 +222,43 @@ public class EntityBuilder {
         return type;
     }
 
+
+    //TODO: переписать, те же ошибки что и в createPhone
+    public Employer createEmployer(EmployerDTO employerName) {
+        // Employer employer1 = new Employer();
+        if (employerName != null) {
+            Employer employerFromDataBase = employerRepo.findFirstByNaturalId(String.valueOf(employerName.getId()));
+            if (employerFromDataBase == null) {
+                Employer employerNew = new Employer();
+                employerNew.setAccredited_it_employer(employerName.isAccreditedItEmployer());
+                employerNew.setUrl(employerName.getUrl());
+                employerNew.setTrusted(employerName.isTrusted());
+                employerNew.setName(employerName.getName());
+                return employerNew;
+            } else {
+                return employerFromDataBase;
+            }
+        }
+        return null;
+    }
+
     public Vacancy createVacancies(Item item) {
-        Vacancy vacancy = new Vacancy();
-        vacancy.setAddress(createAddress(item));
-        vacancy.setArea(createArea(item.getArea()));
-        vacancy.setContacts(createContacts(item));
-        vacancy.setEmployer(createEmployer(item.getEmployer()));
-        vacancy.setSalary(createSalary(item));
-        vacancy.setProfessionalRole(createProfessionalRole(item.getProfessionalRoles()));
-        vacancy.setSchedule(createShedule(item.getSchedule()));
-        vacancy.setType(createType(item));
-        vacancy.setNaturalId(item.getId());
-        return vacancy;
+        Vacancy vacancyFromDB = vacancyRepo.findFirstByNaturalId(item.getId());
+        if (vacancyFromDB == null) {
+            Vacancy vacancyNew = new Vacancy();
+            vacancyNew.setNaturalId(item.getId());
+            vacancyNew.setAddress(createAddress(item));
+            vacancyNew.setArea(createArea(item.getArea()));
+            vacancyNew.setContacts(createContacts(item));
+            vacancyNew.setEmployer(createEmployer(item.getEmployer()));
+            vacancyNew.setSalary(createSalary(item));
+            vacancyNew.setProfessionalRole(createProfessionalRole(item.getProfessionalRoles()));
+            vacancyNew.setSchedule(createShedule(item.getSchedule()));
+            vacancyNew.setType(createType(item));
+            vacancyNew.setNaturalId(item.getId());
+            return vacancyNew;
+        } else {
+            return vacancyFromDB;
+        }
     }
 }

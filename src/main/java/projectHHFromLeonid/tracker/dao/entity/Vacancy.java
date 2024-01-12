@@ -1,4 +1,3 @@
-
 package projectHHFromLeonid.tracker.dao.entity;
 
 import lombok.Getter;
