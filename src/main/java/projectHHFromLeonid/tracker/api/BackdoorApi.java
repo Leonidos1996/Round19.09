@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import projectHHFromLeonid.tracker.integration.hh.HHIntegrationService;
 
+import java.util.List;
+
 //Апи для вызова внутренних сервисов
 @RestController
 public class BackdoorApi {
@@ -30,9 +32,9 @@ public class BackdoorApi {
 
     //http://localhost:8080/get_vacancies
     @GetMapping(value = "/get_vacancies", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void novaRuchka() {
+    List<VacancyDTOForJdbc> novaRuchka() {
 
-       serviceJDBC.convertFromRepo();
+       return serviceJDBC.convertFromRepo();
     }
 
 }
