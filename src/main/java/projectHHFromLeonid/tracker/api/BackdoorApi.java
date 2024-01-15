@@ -30,11 +30,17 @@ public class BackdoorApi {
 
     }
 
-    //http://localhost:8080/get_vacancies
-    @GetMapping(value = "/get_vacancies", produces = MediaType.APPLICATION_JSON_VALUE)
+    //http://localhost:8080/get_vacanciess
+    @GetMapping(value = "/get_vacanciess", produces = MediaType.APPLICATION_JSON_VALUE)
     List<VacancyDTOForJdbc> novaRuchka() {
 
        return serviceJDBC.convertFromRepo();
     }
 
+
+    @GetMapping(value = "/get_vacancies", produces = MediaType.APPLICATION_JSON_VALUE)
+    List<VacancyDTOAmount> novaRuchkaAmount() {
+
+        return serviceJDBC.convertFromSum();
+    }
 }

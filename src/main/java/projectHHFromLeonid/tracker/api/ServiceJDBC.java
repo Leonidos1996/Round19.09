@@ -8,10 +8,13 @@ import java.util.List;
 @Service
 public class ServiceJDBC {
     public final VacancyRepositoryForRequiest vacancyRepositoryForRequiest;
+    public final VacancyDTOAmount vacancyDTOAmount;
+
 
     @Autowired
-    public ServiceJDBC(VacancyRepositoryForRequiest vacancyRepositoryForRequiest) {
+    public ServiceJDBC(VacancyRepositoryForRequiest vacancyRepositoryForRequiest, VacancyDTOAmount vacancyDTOAmount) {
         this.vacancyRepositoryForRequiest = vacancyRepositoryForRequiest;
+        this.vacancyDTOAmount = vacancyDTOAmount;
     }
 
     public List<VacancyDTOForJdbc> convertFromRepo() {
@@ -19,5 +22,14 @@ public class ServiceJDBC {
         return vacancyRepositoryForRequiest.getVacanciesGroupedByCity();
     }
 
+//    public List<VacancyDTOForJdbc> convertFromSum() {
+//
+//        return vacancyRepositoryForRequiest.getVacanciesGroupedBySalaryAndSity();
+//    }
+
+    public List<VacancyDTOAmount> convertFromSum(){
+
+        return vacancyRepositoryForRequiest.getVacanciesGroupByAmount();
+    }
 
 }
